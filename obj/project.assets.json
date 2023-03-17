@@ -8,24 +8,26 @@
     "net7.0": []
   },
   "packageFolders": {
-    "/home/bewe/.nuget/packages/": {}
+    "C:\\Users\\Henry\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/bewe/Documents/Tubes2_besok-kelar/Tubes2_besok-kelar.csproj",
+      "projectUniqueName": "D:\\Semester IV\\StrategiAlgoritma\\repository\\Tubes2_besok-kelar\\Tubes2_besok-kelar.csproj",
       "projectName": "Tubes2_besok-kelar",
-      "projectPath": "/home/bewe/Documents/Tubes2_besok-kelar/Tubes2_besok-kelar.csproj",
-      "packagesPath": "/home/bewe/.nuget/packages/",
-      "outputPath": "/home/bewe/Documents/Tubes2_besok-kelar/obj/",
+      "projectPath": "D:\\Semester IV\\StrategiAlgoritma\\repository\\Tubes2_besok-kelar\\Tubes2_besok-kelar.csproj",
+      "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
+      "outputPath": "D:\\Semester IV\\StrategiAlgoritma\\repository\\Tubes2_besok-kelar\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/bewe/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -59,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
