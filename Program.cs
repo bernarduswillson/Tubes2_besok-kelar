@@ -93,9 +93,9 @@ class BFS
     }
     public bool isDone(int[,] arr)
     {
-        for (int i = 0 ; i < arr.GetLength(1); i ++)
+        for (int i = 0 ; i < arr.GetLength(0); i ++)
         {
-            for (int j =  0 ; j < arr.GetLength(0) ; j++)
+            for (int j =  0 ; j < arr.GetLength(1) ; j++)
             {
                 if (arr[i,j] == 3)
                 {
@@ -112,18 +112,12 @@ class BFS
         while (!found)
         {
             //Ambil tiap jalurnya
-            // Console.WriteLine(coorMap.Count);
             Path tempPath = coorMap.Dequeue();
             Path tempP1 = new Path(tempPath);
             Path tempP2 = new Path(tempPath);
             Path tempP3 = new Path(tempPath);
             Path tempP4 = new Path(tempPath);
             tempCoor = tempPath.getEl(tempPath.getIdx());
-            // Console.WriteLine("==========================");
-            // tempPath.displayCoord();
-            // tempPath.displayMaze();
-            // Console.WriteLine(tempPath.getCount());
-            // Console.WriteLine("==========================");
             //Cek apakah sudah semua terambil
             if (isDone(tempPath.getMaze()))
             {
@@ -144,9 +138,6 @@ class BFS
                     append.pickTreasure(tempCoor[0],tempCoor[1]-1);
                 }
                 append.Append(tempCoor[0],tempCoor[1]-1);
-                // Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                // append.displayCoord();
-                // Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 coorMap.Enqueue(append);
             }
             //cek bagian bawah
@@ -161,9 +152,6 @@ class BFS
                 }
                 append.Append(tempCoor[0],tempCoor[1]+1);
                 coorMap.Enqueue(append);
-                // Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                // append.displayCoord();
-                // Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             }
             //cek bagian kiri
             if (tempPath.canTravel(tempCoor[0]-1,tempCoor[1]))
@@ -223,9 +211,9 @@ class Path
     }
     public void displayMaze()
     {
-        for (int i = 0 ; i<maze.GetLength(1) ; i++)
+        for (int i = 0 ; i<maze.GetLength(0) ; i++)
         {
-            for (int j = 0 ;  j < maze.GetLength(0) ; j++)
+            for (int j = 0 ;  j < maze.GetLength(1) ; j++)
             {
                 Console.Write(maze[i,j] + " ");
             }
@@ -260,7 +248,7 @@ class Path
     }
     public bool canTravel(int x, int y)
     {
-        if (x>=0 && x<maze.GetLength(1) && y>=0 && y<maze.GetLength(0))
+        if (x>=0 && x<maze.GetLength(0) && y>=0 && y<maze.GetLength(1))
         {
             if (maze[x,y] != 0)
             {
