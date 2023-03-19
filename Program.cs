@@ -14,11 +14,15 @@ class BFS
     private int[,] maze;
     private int y;
     private int count;
+    private int countSteps;
+    private int countVisited;
     public BFS(int x, int y, int[,] arr, int t)
     {
         this.x = x;
         this.y = y;
         this.maze = arr;
+        this.countSteps = 0;
+        this.countVisited = 0;
         this.count = t;
         this.coorMap = new Queue<Path>();
         //Lakukan pengecekan pada kiri start
@@ -125,7 +129,7 @@ class BFS
                 tempPath.displayCoord();
                 tempPath.displayMaze();
                 found = true;
-                break; 
+                break;
             }
             //cek bagian atas
             if (tempPath.canTravel(tempCoor[0],tempCoor[1]-1))
@@ -139,6 +143,7 @@ class BFS
                 }
                 append.Append(tempCoor[0],tempCoor[1]-1);
                 coorMap.Enqueue(append);
+                countVisited++;
             }
             //cek bagian bawah
             if (tempPath.canTravel(tempCoor[0],tempCoor[1]+1))
@@ -152,6 +157,7 @@ class BFS
                 }
                 append.Append(tempCoor[0],tempCoor[1]+1);
                 coorMap.Enqueue(append);
+                countVisited++;
             }
             //cek bagian kiri
             if (tempPath.canTravel(tempCoor[0]-1,tempCoor[1]))
@@ -165,6 +171,7 @@ class BFS
                 }
                 append.Append(tempCoor[0]-1,tempCoor[1]);
                 coorMap.Enqueue(append);
+                countVisited++;
             }
             //cek bagian kanan
             if (tempPath.canTravel(tempCoor[0]+1,tempCoor[1]))
@@ -178,15 +185,33 @@ class BFS
                 }
                 append.Append(tempCoor[0]+1,tempCoor[1]);
                 coorMap.Enqueue(append);
+                countVisited++;
             }
         }
+    }
+
+    public void displayPath()
+    {
+        while (coorMap.Count != 0)
+        {
+            Path temp = coorMap.Dequeue();
+            temp.displayCoord();
+            temp.displayMaze();
+        }
+    }
+
+    public void getCountVisited()
+    {
+        Console.WriteLine(countVisited);
     }
 }
 class DFS
 {
     private Stack<Simpul> visited;
     private int count;
+    private int countSteps;
     private int totalTreasure;
+    private int countVisited;
     private int[,] maze;
     private int[,] visitedMaze;
     private int x;
@@ -200,6 +225,8 @@ class DFS
         this.maze = maze;
         this.visitedMaze = (int[,]) maze.Clone();
         this.count = 0;
+        this.countSteps = 0;
+        this.countVisited = 0;
     }
     public void findPath()
     {
@@ -346,6 +373,7 @@ class DFS
                 visited.Push(top);
                 top = visited.Pop();
             }
+            this.countSteps++;
         }
     }
     public void displayPath()
@@ -355,6 +383,29 @@ class DFS
         {
             value.displaySimpul();
         }
+    }
+
+    public void displaySteps()
+    {
+        Console.WriteLine(this.countSteps);
+    }
+
+    public void displayVisited()
+    {
+        for (int i = 0; i < this.visitedMaze.GetLength(0); i++)
+        {
+            for (int j = 0; j < this.visitedMaze.GetLength(1); j++)
+            {
+                if (this.visitedMaze[i,j] == -1)
+                {
+                    this.countVisited++;
+                }
+                else
+                {
+                }
+            }
+        }
+        Console.WriteLine(this.countVisited);
     }
 }
 class Simpul
@@ -689,14 +740,18 @@ class Program
             Console.WriteLine();
         }
         // Console.WriteLine(treasure);
-        // BFS root = new BFS(x,y,arr,treasure);
-        // Console.WriteLine("Koordinat untuk mengambil semua treasure : ");
-        // root.findPath();
+        BFS root = new BFS(x,y,arr,treasure);
+        Console.WriteLine("Koordinat untuk mengambil semua treasure : ");
+        root.findPath();
+        root.displayPath();
+        root.getCountVisited();
 
         //DFS
         // Console.WriteLine(arr.GetLength(1));
-        DFS C = new DFS(x,y,treasure,arr);
-        C.findPath();
-        C.displayPath();
+        // DFS C = new DFS(x,y,treasure,arr);
+        // C.findPath();
+        // C.displayPath();
+        // C.displaySteps();
+        // C.displayVisited();
     }
 }

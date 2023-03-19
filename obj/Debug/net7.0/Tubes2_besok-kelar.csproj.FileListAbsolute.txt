@@ -28,3 +28,18 @@ D:\Semester IV\StrategiAlgoritma\repository\Tubes2_besok-kelar\obj\Debug\net7.0\
 D:\Semester IV\StrategiAlgoritma\repository\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.pdb
 D:\Semester IV\StrategiAlgoritma\repository\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.genruntimeconfig.cache
 D:\Semester IV\StrategiAlgoritma\repository\Tubes2_besok-kelar\obj\Debug\net7.0\ref\Tubes2_besok-kelar.dll
+D:\Tubes2_besok-kelar\bin\Debug\net7.0\Tubes2_besok-kelar.exe
+D:\Tubes2_besok-kelar\bin\Debug\net7.0\Tubes2_besok-kelar.deps.json
+D:\Tubes2_besok-kelar\bin\Debug\net7.0\Tubes2_besok-kelar.runtimeconfig.json
+D:\Tubes2_besok-kelar\bin\Debug\net7.0\Tubes2_besok-kelar.dll
+D:\Tubes2_besok-kelar\bin\Debug\net7.0\Tubes2_besok-kelar.pdb
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.csproj.AssemblyReference.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.AssemblyInfoInputs.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.AssemblyInfo.cs
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.csproj.CoreCompileInputs.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.dll
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\refint\Tubes2_besok-kelar.dll
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.pdb
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.genruntimeconfig.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\ref\Tubes2_besok-kelar.dll
