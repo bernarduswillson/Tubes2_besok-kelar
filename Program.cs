@@ -182,6 +182,288 @@ class BFS
         }
     }
 }
+class DFS
+{
+    private Stack<Simpul> visited;
+    private int count;
+    private int totalTreasure;
+    private int[,] maze;
+    private int[,] visitedMaze;
+    private int x;
+    private int y;
+    public DFS(int x, int y, int total, int[,] maze)
+    {
+        this.visited = new Stack<Simpul>();
+        this.x = x;
+        this.y = y;
+        this.totalTreasure = total;
+        this.maze = maze;
+        this.visitedMaze = (int[,]) maze.Clone();
+        this.count = 0;
+    }
+    public void findPath()
+    {
+        Simpul first = new Simpul(this.x, this.y, maze);
+        visitedMaze[x,y] = -1;
+        visited.Push(first);
+        /*
+            urutan prioritas :
+            - kanan
+            - bawah
+            - kiri
+            - atas
+        */
+        int done = 0;
+        // first.displaySimpul();
+        Simpul top;
+        while (true)
+        {
+            bool valid = true;
+            top = new Simpul(visited.Pop());
+            // top.displaySimpul();
+            // Console.WriteLine(count);
+            // Console.WriteLine("=====" + maze[top.getX(),top.getY()]);
+            if (maze[top.getX(),top.getY()]==3)
+            {
+                count++;
+                maze[top.getX(),top.getY()] = 2;
+            }
+            if (count == totalTreasure)
+            {
+                visited.Push(top);
+                break;
+            }
+            // done++;
+            // if (done>12)
+            // {
+            //     break;
+            // }
+            //kanan
+            if (top.canGoRight && valid)
+            {
+                if (visitedMaze[top.getX(), top.getY()+1] != -1)
+                {
+                    top.canGoRight = false;
+                    Simpul temp = new Simpul(top.getX(), top.getY()+1, maze);
+                    visited.Push(top);
+                    visited.Push(temp);
+                    visitedMaze[top.getX(), top.getY()+1] = -1;
+                    valid = false;
+                    // Console.WriteLine("R1");
+                }
+            }
+            if (top.canGoDown && valid)
+            {
+                if (visitedMaze[top.getX()+1, top.getY()] != -1)
+                {
+                    top.canGoDown = false;
+                    Simpul temp = new Simpul(top.getX()+1, top.getY(), maze);
+                    visited.Push(top);
+                    visited.Push(temp);
+                    visitedMaze[top.getX()+1, top.getY()] = -1;
+                    valid = false;
+                    // Console.WriteLine("D1");
+                }
+            }
+            if (top.canGoLeft && valid)
+            {
+                if (visitedMaze[top.getX(), top.getY()-1] != -1)
+                {
+                    top.canGoLeft = false;
+                    Simpul temp = new Simpul(top.getX(), top.getY()-1, maze);
+                    visited.Push(top);
+                    visited.Push(temp);
+                    visitedMaze[top.getX(), top.getY()-1] = -1;
+                    valid = false;
+                    // Console.WriteLine("L1");
+                }
+            }
+            if (top.canGoUp && valid)
+            {
+                if (visitedMaze[top.getX()-1, top.getY()] != -1)
+                {
+                    // Console.WriteLine("HAHAHAHAA");
+                    // top.displaySimpul();
+                    top.canGoUp = false;
+                    Simpul temp = new Simpul(top.getX()-1, top.getY(), maze);
+                    visited.Push(top);
+                    visited.Push(temp);
+                    visitedMaze[top.getX()-1, top.getY()] = -1;
+                    valid = false;
+                    // Console.WriteLine("U1");
+                }
+            }
+            if (top.canGoRight && valid)
+            {
+                top.canGoRight = false;
+                Simpul temp = new Simpul(top.getX(),top.getY()+1, maze);
+                visited.Push(top);
+                visited.Push(temp);
+                visitedMaze[top.getX(),top.getY()+1] = -1;
+                // Console.WriteLine("1========================");
+                valid = false;
+                // Console.WriteLine("R2");
+            }
+            //bawah
+            else if (top.canGoDown&& valid)
+            {
+                top.canGoDown = false;
+                Simpul temp = new Simpul(top.getX()+1,top.getY(), maze);
+                visited.Push(top);
+                visited.Push(temp);
+                visitedMaze[top.getX()+1,top.getY()] = -1;
+                // Console.WriteLine("2");
+                // Console.WriteLine("BARIS");
+                // Console.WriteLine(maze[x,y+1]);
+                // Console.WriteLine(visited.Count);
+                // Console.WriteLine("==============");
+                // Console.WriteLine("D2");
+            }
+            //kiri
+            else if (top.canGoLeft&& valid)
+            {
+                top.canGoLeft = false;
+                Simpul temp = new Simpul(top.getX(), top.getY()-1, maze);
+                visited.Push(top);
+                visited.Push(temp);
+                visitedMaze[top.getX() ,top.getY()-1] = -1;
+                // Console.WriteLine("3");
+                // Console.WriteLine("L2");
+            }
+            //atas
+            else if (top.canGoUp&& valid)
+            {
+                top.canGoUp = false;
+                Simpul temp = new Simpul(  top.getX()-1,top.getY(), maze);
+                visited.Push(top);
+                visited.Push(temp);
+                visitedMaze[  top.getX()-1,top.getY()] = -1;
+                // Console.WriteLine("4");
+                // Console.WriteLine("U2");;
+            }
+            else
+            {
+                visited.Push(top);
+                top = visited.Pop();
+            }
+        }
+    }
+    public void displayPath()
+    {
+        Stack<Simpul> copy = new Stack<Simpul>(this.visited);
+        foreach (Simpul value in copy)
+        {
+            value.displaySimpul();
+        }
+    }
+}
+class Simpul
+{
+    private int x;
+    private int y;
+    public bool canGoLeft;
+    public bool canGoRight;
+    public bool canGoDown;
+    public bool canGoUp;
+    int[,] maze;
+    
+    public Simpul(Simpul other)
+    {
+        this.x = other.x;
+        this.y = other.y;
+        this.maze = (int[,]) other.maze.Clone();
+        this.canGoDown = other.canGoDown;
+        this.canGoLeft = other.canGoLeft;
+        this.canGoRight = other.canGoRight;
+        this.canGoUp = other.canGoUp;
+    }
+    
+    public Simpul(int x, int y, int[,] maze)
+    {
+        this.x = x;
+        this.y = y;
+        this.maze = maze;
+        
+        // Check if there is a path to the right of the current cell
+        if (y+1 < maze.GetLength(1))
+        {
+            if(maze[x,y+1] != 0)
+            {
+                this.canGoRight = true;
+            }
+            else
+            {
+                this.canGoRight = false;
+            }
+            
+        }
+        else
+        {
+            this.canGoRight = false;
+        }
+        if (y - 1 >= 0)
+        {
+            if(maze[x,y-1] != 0)
+            {
+                this.canGoLeft = true;
+            }
+            else
+            {
+                this.canGoLeft = false;
+            }
+        }
+        else
+        {
+            this.canGoLeft = false;
+        }
+        if (x - 1 >= 0)
+        {
+            if(maze[x-1,y] != 0)
+            {
+                this.canGoUp = true;
+            }
+            else
+            {
+                this.canGoUp = false;
+            }
+        }
+        else
+        {
+            this.canGoUp = false;
+        }
+        if (x + 1 < maze.GetLength(0))
+        {
+            if (maze[x+1,y] != 0)
+            {
+                this.canGoDown = true;
+            }
+            else
+            {
+                this.canGoDown = false;
+            }
+        }
+        else
+        {
+            this.canGoDown = false;
+        }
+    }
+    
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getY()
+    {
+        return y;
+    }
+    
+    public void displaySimpul()
+    {
+        Console.WriteLine(x + " " + y);
+    }
+}
+
 class Path
 {
     private int[,] arr;
@@ -384,7 +666,7 @@ class Program
         }
         reader.Close();
         reader2.Close();
-        // Node root;
+        // Simpul root;
         //bikin graph
         int x = 0;
         int y = 0;
@@ -407,8 +689,14 @@ class Program
             Console.WriteLine();
         }
         // Console.WriteLine(treasure);
-        BFS root = new BFS(x,y,arr,treasure);
-        Console.WriteLine("Koordinat untuk mengambil semua treasure : ");
-        root.findPath();
+        // BFS root = new BFS(x,y,arr,treasure);
+        // Console.WriteLine("Koordinat untuk mengambil semua treasure : ");
+        // root.findPath();
+
+        //DFS
+        // Console.WriteLine(arr.GetLength(1));
+        DFS C = new DFS(x,y,treasure,arr);
+        C.findPath();
+        C.displayPath();
     }
 }
