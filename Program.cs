@@ -656,7 +656,7 @@ class Program
     {
         int row = 1;
         int col = 0;
-        string filePath = @"./test/config.txt"; 
+        string filePath = @"../../../test/config.txt"; 
         StreamReader reader = new StreamReader(filePath);
         //Tentuin kolom dan baris
         String line = reader.ReadLine();
