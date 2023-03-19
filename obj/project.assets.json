@@ -8,26 +8,27 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\USER\\.nuget\\packages\\": {}
+    "C:\\Users\\Henry\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tubes2_besok-kelar\\Tubes2_besok-kelar.csproj",
+      "projectUniqueName": "D:\\Semester IV\\StrategiAlgoritma\\repository\\Tubes2_besok-kelar\\Tubes2_besok-kelar.csproj",
       "projectName": "Tubes2_besok-kelar",
-      "projectPath": "D:\\Tubes2_besok-kelar\\Tubes2_besok-kelar.csproj",
-      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "D:\\Tubes2_besok-kelar\\obj\\",
+      "projectPath": "D:\\Semester IV\\StrategiAlgoritma\\repository\\Tubes2_besok-kelar\\Tubes2_besok-kelar.csproj",
+      "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
+      "outputPath": "D:\\Semester IV\\StrategiAlgoritma\\repository\\Tubes2_besok-kelar\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {

@@ -26,24 +26,38 @@ class BFS
         this.count = t;
         this.coorMap = new Queue<Path>();
         //Lakukan pengecekan pada kiri start
-        if (this.x-1 >= 0 && this.maze[x-1,y] != 0)
+        if (this.y-1 >= 0 && this.maze[x,y-1] != 0)
         {
             Path temp = new Path(this.maze);
-            if(this.maze[x-1,y] == 3)
+            if(this.maze[x,y-1] == 3)
             {
                 temp.pickTreasure(x-1,y);
             }
             temp.Append(x,y);
-            temp.Append(x-1,y);
+            temp.Append(x,y-1);
             // path.Enqueue("L");
             this.coorMap.Enqueue(temp);
             // Console.Write("L");
         }
         //Lakukan pengecekan pada kanan start
-        if (this.x+1 < this.maze.GetLength(1) && this.maze[x+1,y] != 0)
+        if (this.y+1 < this.maze.GetLength(1) && this.maze[x,y+1] != 0)
         {
             // Console.WriteLine(this.maze.GetLength(0));
             // Console.WriteLine(x+1)/;
+            Path temp = new Path(this.maze);
+            if(this.maze[x,y+1] == 3)
+            {
+                temp.pickTreasure(x+1,y);
+            }
+            temp.Append(x,y);
+            temp.Append(x,y+1);
+            // path.Enqueue("R");
+            coorMap.Enqueue(temp);
+            // Console.Write("R");
+        }
+        //Lakukan pengecekan pada bawah start        
+        if (this.x+1 < this.maze.GetLength(0) && this.maze[x+1,y] != 0)
+        {
             Path temp = new Path(this.maze);
             if(this.maze[x+1,y] == 3)
             {
@@ -51,36 +65,22 @@ class BFS
             }
             temp.Append(x,y);
             temp.Append(x+1,y);
-            // path.Enqueue("R");
-            coorMap.Enqueue(temp);
-            // Console.Write("R");
-        }
-        //Lakukan pengecekan pada bawah start        
-        if (this.y+1 < this.maze.GetLength(0) && this.maze[x,y+1] != 0)
-        {
-            Path temp = new Path(this.maze);
-            if(this.maze[x,y+1] == 3)
-            {
-                temp.pickTreasure(x,y+1);
-            }
-            temp.Append(x,y);
-            temp.Append(x,y+1);
             // path.Enqueue("D");
             coorMap.Enqueue(temp);
             // Console.Write("D");
         }
         //Lakukan pengecekan pada atas start        
-        if (this.y-1 >= 0 && this.maze[x,y-1] != 0)
+        if (this.x-1 >= 0 && this.maze[x-1,y] != 0)
         {
             Path temp = new Path(this.maze);
-            if(this.maze[x,y-1] == 3)
+            if(this.maze[x-1,y] == 3)
             {
                 temp.pickTreasure(x,y-1);
             }
             temp.Append(x,y);
-            temp.Append(x,y-1);
+            temp.Append(x-1,y);
             // path.Enqueue("U");
-            coorMap.Enqueue(temp);
+            coorMap.Enqueue(temp); 
             // Console.Write("Up");
         }
         // Path temp2 = coorMap.Dequeue();
@@ -127,44 +127,16 @@ class BFS
             {
                 // Console.Write("PP");
                 tempPath.displayCoord();
-                tempPath.displayMaze();
+                // tempPath.displayMaze();
                 found = true;
                 break;
             }
             //cek bagian atas
-            if (tempPath.canTravel(tempCoor[0],tempCoor[1]-1))
-            {
-                //cek apakah treasure
-                Path append = new Path(this.maze);
-                append = tempP1;
-                if (append.isTreasure(tempCoor[0],tempCoor[1]-1))
-                {
-                    append.pickTreasure(tempCoor[0],tempCoor[1]-1);
-                }
-                append.Append(tempCoor[0],tempCoor[1]-1);
-                coorMap.Enqueue(append);
-                countVisited++;
-            }
-            //cek bagian bawah
-            if (tempPath.canTravel(tempCoor[0],tempCoor[1]+1))
-            {
-                //cek apakah treasure
-                Path append = new Path(this.maze);
-                append = tempP2;
-                if (append.isTreasure(tempCoor[0],tempCoor[1]+1))
-                {
-                    append.pickTreasure(tempCoor[0],tempCoor[1]+1);
-                }
-                append.Append(tempCoor[0],tempCoor[1]+1);
-                coorMap.Enqueue(append);
-                countVisited++;
-            }
-            //cek bagian kiri
             if (tempPath.canTravel(tempCoor[0]-1,tempCoor[1]))
             {
                 //cek apakah treasure
                 Path append = new Path(this.maze);
-                append = tempP3;
+                append = tempP1;
                 if (append.isTreasure(tempCoor[0]-1,tempCoor[1]))
                 {
                     append.pickTreasure(tempCoor[0]-1,tempCoor[1]);
@@ -173,17 +145,45 @@ class BFS
                 coorMap.Enqueue(append);
                 countVisited++;
             }
-            //cek bagian kanan
+            //cek bagian bawah
             if (tempPath.canTravel(tempCoor[0]+1,tempCoor[1]))
             {
                 //cek apakah treasure
                 Path append = new Path(this.maze);
-                append = tempP4;
+                append = tempP2;
                 if (append.isTreasure(tempCoor[0]+1,tempCoor[1]))
                 {
                     append.pickTreasure(tempCoor[0]+1,tempCoor[1]);
                 }
                 append.Append(tempCoor[0]+1,tempCoor[1]);
+                coorMap.Enqueue(append);
+                countVisited++;
+            }
+            //cek bagian kiri
+            if (tempPath.canTravel(tempCoor[0],tempCoor[1]-1))
+            {
+                //cek apakah treasure
+                Path append = new Path(this.maze);
+                append = tempP3;
+                if (append.isTreasure(tempCoor[0],tempCoor[1]-1))
+                {
+                    append.pickTreasure(tempCoor[0]-1,tempCoor[1]);
+                }
+                append.Append(tempCoor[0],tempCoor[1]-1);
+                coorMap.Enqueue(append);
+                countVisited++;
+            }
+            //cek bagian kanan
+            if (tempPath.canTravel(tempCoor[0],tempCoor[1]+1))
+            {
+                //cek apakah treasure
+                Path append = new Path(this.maze);
+                append = tempP4;
+                if (append.isTreasure(tempCoor[0],tempCoor[1]+1))
+                {
+                    append.pickTreasure(tempCoor[0],tempCoor[1]+1);
+                }
+                append.Append(tempCoor[0],tempCoor[1]+1);
                 coorMap.Enqueue(append);
                 countVisited++;
             }
@@ -743,8 +743,8 @@ class Program
         BFS root = new BFS(x,y,arr,treasure);
         Console.WriteLine("Koordinat untuk mengambil semua treasure : ");
         root.findPath();
-        root.displayPath();
-        root.getCountVisited();
+        // root.displayPath();
+        // root.getCountVisited();
 
         //DFS
         // Console.WriteLine(arr.GetLength(1));

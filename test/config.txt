@@ -1,3 +1,2 @@
-K R R
-X X R
-X X T
+K R
+X T
