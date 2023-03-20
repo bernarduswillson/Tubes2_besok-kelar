@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
-    class Path
+    class Paths
     {
         private int[,] arr;
         private int[,] maze;
@@ -17,7 +17,7 @@ namespace WinFormsApp1
         {
             return arr;
         }
-        public Path(int[,] maze)
+        public Paths(int[,] maze)
         {
             this.arr = new int[1, 2];
             this.maze = maze;
@@ -25,7 +25,7 @@ namespace WinFormsApp1
             this.count = 0;
             this.idx = -1;
         }
-        public Path(Path other)
+        public Paths(Paths other)
         {
             this.arr = (int[,])other.arr.Clone();
             this.maze = (int[,])other.maze.Clone();
@@ -144,7 +144,7 @@ namespace WinFormsApp1
         4 -> atas
         */
         private Queue<String> path;
-        private Queue<Path> coorMap;
+        private Queue<Paths> coorMap;
         private int x;
         private int[,] maze;
         private int y;
@@ -159,11 +159,11 @@ namespace WinFormsApp1
             this.countSteps = 0;
             this.countVisited = 0;
             this.count = t;
-            this.coorMap = new Queue<Path>();
+            this.coorMap = new Queue<Paths>();
             //Lakukan pengecekan pada kiri start
             if (this.y - 1 >= 0 && this.maze[x, y - 1] != 0)
             {
-                Path temp = new Path(this.maze);
+                Paths temp = new Paths(this.maze);
                 if (this.maze[x, y - 1] == 3)
                 {
                     temp.pickTreasure(x - 1, y);
@@ -179,7 +179,7 @@ namespace WinFormsApp1
             {
                 // Console.WriteLine(this.maze.GetLength(0));
                 // Console.WriteLine(x+1)/;
-                Path temp = new Path(this.maze);
+                Paths temp = new Paths(this.maze);
                 if (this.maze[x, y + 1] == 3)
                 {
                     temp.pickTreasure(x + 1, y);
@@ -193,7 +193,7 @@ namespace WinFormsApp1
             //Lakukan pengecekan pada bawah start        
             if (this.x + 1 < this.maze.GetLength(0) && this.maze[x + 1, y] != 0)
             {
-                Path temp = new Path(this.maze);
+                Paths temp = new Paths(this.maze);
                 if (this.maze[x + 1, y] == 3)
                 {
                     temp.pickTreasure(x + 1, y);
@@ -207,7 +207,7 @@ namespace WinFormsApp1
             //Lakukan pengecekan pada atas start        
             if (this.x - 1 >= 0 && this.maze[x - 1, y] != 0)
             {
-                Path temp = new Path(this.maze);
+                Paths temp = new Paths(this.maze);
                 if (this.maze[x - 1, y] == 3)
                 {
                     temp.pickTreasure(x, y - 1);
@@ -251,11 +251,11 @@ namespace WinFormsApp1
             while (!found)
             {
                 //Ambil tiap jalurnya
-                Path tempPath = coorMap.Dequeue();
-                Path tempP1 = new Path(tempPath);
-                Path tempP2 = new Path(tempPath);
-                Path tempP3 = new Path(tempPath);
-                Path tempP4 = new Path(tempPath);
+                Paths tempPath = coorMap.Dequeue();
+                Paths tempP1 = new Paths(tempPath);
+                Paths tempP2 = new Paths(tempPath);
+                Paths tempP3 = new Paths(tempPath);
+                Paths tempP4 = new Paths(tempPath);
                 tempCoor = tempPath.getEl(tempPath.getIdx());
                 //Cek apakah sudah semua terambil
                 if (isDone(tempPath.getMaze()))
@@ -270,7 +270,7 @@ namespace WinFormsApp1
                 if (tempPath.canTravel(tempCoor[0] - 1, tempCoor[1]))
                 {
                     //cek apakah treasure
-                    Path append = new Path(this.maze);
+                    Paths append = new Paths(this.maze);
                     append = tempP1;
                     if (append.isTreasure(tempCoor[0] - 1, tempCoor[1]))
                     {
@@ -284,7 +284,7 @@ namespace WinFormsApp1
                 if (tempPath.canTravel(tempCoor[0] + 1, tempCoor[1]))
                 {
                     //cek apakah treasure
-                    Path append = new Path(this.maze);
+                    Paths append = new Paths(this.maze);
                     append = tempP2;
                     if (append.isTreasure(tempCoor[0] + 1, tempCoor[1]))
                     {
@@ -298,7 +298,7 @@ namespace WinFormsApp1
                 if (tempPath.canTravel(tempCoor[0], tempCoor[1] - 1))
                 {
                     //cek apakah treasure
-                    Path append = new Path(this.maze);
+                    Paths append = new Paths(this.maze);
                     append = tempP3;
                     if (append.isTreasure(tempCoor[0], tempCoor[1] - 1))
                     {
@@ -312,7 +312,7 @@ namespace WinFormsApp1
                 if (tempPath.canTravel(tempCoor[0], tempCoor[1] + 1))
                 {
                     //cek apakah treasure
-                    Path append = new Path(this.maze);
+                    Paths append = new Paths(this.maze);
                     append = tempP4;
                     if (append.isTreasure(tempCoor[0], tempCoor[1] + 1))
                     {
@@ -329,7 +329,7 @@ namespace WinFormsApp1
         {
             while (coorMap.Count != 0)
             {
-                Path temp = coorMap.Dequeue();
+                Paths temp = coorMap.Dequeue();
                 temp.displayCoord();
                 temp.displayMaze();
             }

@@ -43,3 +43,5 @@ D:\Tubes2_besok-kelar\obj\Debug\net7.0\refint\Tubes2_besok-kelar.dll
 D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.pdb
 D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.genruntimeconfig.cache
 D:\Tubes2_besok-kelar\obj\Debug\net7.0\ref\Tubes2_besok-kelar.dll
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\WinFormsApp1.Form1.resources
+D:\Tubes2_besok-kelar\obj\Debug\net7.0\Tubes2_besok-kelar.csproj.GenerateResource.cache

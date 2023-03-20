@@ -189,6 +189,11 @@ namespace WinFormsApp1
             }
             Console.WriteLine(this.countVisited);
         }
+
+        public Stack<Simpul> getResult()
+        {
+            return this.result;
+        }
     }
     class Simpul
     {
