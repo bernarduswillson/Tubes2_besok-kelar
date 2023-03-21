@@ -42,6 +42,7 @@ namespace WinFormsApp1
             label1 = new Label();
             button2 = new Button();
             splitContainer1 = new SplitContainer();
+            button3 = new Button();
             label4 = new Label();
             textBox1 = new TextBox();
             trackBar1 = new TrackBar();
@@ -62,11 +63,11 @@ namespace WinFormsApp1
             Title.FlatStyle = FlatStyle.Popup;
             Title.Font = new Font("Impact", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             Title.ForeColor = Color.White;
-            Title.Location = new Point(19, 12);
+            Title.Location = new Point(17, 9);
             Title.Margin = new Padding(2, 0, 2, 0);
             Title.Name = "Title";
             Title.RightToLeft = RightToLeft.No;
-            Title.Size = new Size(307, 42);
+            Title.Size = new Size(249, 34);
             Title.TabIndex = 0;
             Title.Text = "Treasure Hunt Solver";
             Title.TextAlign = ContentAlignment.TopCenter;
@@ -77,10 +78,10 @@ namespace WinFormsApp1
             label2.BackColor = Color.Sienna;
             label2.Font = new Font("Impact", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(72, 265);
-            label2.Margin = new Padding(2, 3, 2, 3);
+            label2.Location = new Point(63, 199);
+            label2.Margin = new Padding(2, 2, 2, 2);
             label2.Name = "label2";
-            label2.Size = new Size(109, 29);
+            label2.Size = new Size(87, 23);
             label2.TabIndex = 6;
             label2.Text = "Algorithm";
             label2.Click += label2_Click;
@@ -92,10 +93,10 @@ namespace WinFormsApp1
             radioButton2.Cursor = Cursors.Hand;
             radioButton2.Font = new Font("Impact", 9F, FontStyle.Regular, GraphicsUnit.Point);
             radioButton2.ForeColor = Color.White;
-            radioButton2.Location = new Point(73, 337);
-            radioButton2.Margin = new Padding(2, 3, 2, 3);
+            radioButton2.Location = new Point(64, 253);
+            radioButton2.Margin = new Padding(2, 2, 2, 2);
             radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(52, 23);
+            radioButton2.Size = new Size(43, 20);
             radioButton2.TabIndex = 5;
             radioButton2.TabStop = true;
             radioButton2.Text = "DFS";
@@ -109,10 +110,10 @@ namespace WinFormsApp1
             radioButton1.Cursor = Cursors.Hand;
             radioButton1.Font = new Font("Impact", 9F, FontStyle.Regular, GraphicsUnit.Point);
             radioButton1.ForeColor = Color.White;
-            radioButton1.Location = new Point(73, 304);
-            radioButton1.Margin = new Padding(2, 3, 2, 3);
+            radioButton1.Location = new Point(64, 228);
+            radioButton1.Margin = new Padding(2, 2, 2, 2);
             radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(52, 23);
+            radioButton1.Size = new Size(43, 20);
             radioButton1.TabIndex = 4;
             radioButton1.TabStop = true;
             radioButton1.Text = "BFS";
@@ -126,10 +127,10 @@ namespace WinFormsApp1
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Impact", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(72, 490);
-            button1.Margin = new Padding(2, 3, 2, 3);
+            button1.Location = new Point(63, 368);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(200, 51);
+            button1.Size = new Size(175, 38);
             button1.TabIndex = 2;
             button1.Text = "SEARCH!";
             button1.TextImageRelation = TextImageRelation.ImageAboveText;
@@ -140,12 +141,12 @@ namespace WinFormsApp1
             // 
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(359, 80);
-            dataGridView1.Margin = new Padding(2, 3, 2, 3);
+            dataGridView1.Location = new Point(314, 60);
+            dataGridView1.Margin = new Padding(2, 2, 2, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(619, 541);
+            dataGridView1.Size = new Size(542, 406);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -155,10 +156,10 @@ namespace WinFormsApp1
             label1.BackColor = Color.Sienna;
             label1.Font = new Font("Impact", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(72, 103);
+            label1.Location = new Point(63, 77);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(65, 29);
+            label1.Size = new Size(51, 23);
             label1.TabIndex = 0;
             label1.Text = "Input";
             // 
@@ -170,10 +171,9 @@ namespace WinFormsApp1
             button2.FlatStyle = FlatStyle.System;
             button2.Font = new Font("Impact", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(72, 140);
-            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Location = new Point(63, 105);
             button2.Name = "button2";
-            button2.Size = new Size(112, 31);
+            button2.Size = new Size(98, 23);
             button2.TabIndex = 7;
             button2.Text = "Upload File";
             button2.UseVisualStyleBackColor = false;
@@ -182,12 +182,12 @@ namespace WinFormsApp1
             // splitContainer1
             // 
             splitContainer1.Location = new Point(1, 0);
-            splitContainer1.Margin = new Padding(3, 4, 3, 4);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.BackColor = Color.Sienna;
+            splitContainer1.Panel1.Controls.Add(button3);
             splitContainer1.Panel1.Controls.Add(label4);
             splitContainer1.Panel1.Controls.Add(textBox1);
             splitContainer1.Panel1.Controls.Add(trackBar1);
@@ -198,27 +198,38 @@ namespace WinFormsApp1
             splitContainer1.Panel2.BackColor = Color.Tan;
             splitContainer1.Panel2.Controls.Add(Title);
             splitContainer1.Panel2.Paint += splitContainer1_Panel2_Paint;
-            splitContainer1.Size = new Size(1001, 640);
-            splitContainer1.SplitterDistance = 333;
-            splitContainer1.SplitterWidth = 5;
+            splitContainer1.Size = new Size(876, 480);
+            splitContainer1.SplitterDistance = 291;
             splitContainer1.TabIndex = 8;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(178, 253);
+            button3.Margin = new Padding(3, 2, 3, 2);
+            button3.Name = "button3";
+            button3.Size = new Size(82, 22);
+            button3.TabIndex = 5;
+            button3.Text = "button3";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Impact", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(195, 413);
+            label4.Location = new Point(171, 310);
             label4.Name = "label4";
-            label4.Size = new Size(28, 19);
+            label4.Size = new Size(22, 16);
             label4.TabIndex = 4;
             label4.Text = "ms";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(130, 410);
+            textBox1.Location = new Point(114, 308);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(66, 27);
+            textBox1.Size = new Size(58, 23);
             textBox1.TabIndex = 3;
             textBox1.Text = "0";
             textBox1.TextAlign = HorizontalAlignment.Center;
@@ -227,32 +238,34 @@ namespace WinFormsApp1
             // trackBar1
             // 
             trackBar1.Cursor = Cursors.Hand;
-            trackBar1.Location = new Point(71, 443);
+            trackBar1.Location = new Point(62, 332);
+            trackBar1.Margin = new Padding(3, 2, 3, 2);
             trackBar1.Maximum = 1000;
             trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(200, 56);
+            trackBar1.Size = new Size(175, 45);
             trackBar1.TabIndex = 1;
             trackBar1.Scroll += trackBar1_Scroll;
             // 
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Impact", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(71, 175);
+            label3.Location = new Point(62, 131);
             label3.Name = "label3";
-            label3.Size = new Size(29, 19);
+            label3.Size = new Size(23, 16);
             label3.TabIndex = 0;
             label3.Text = ".txt";
             label3.Click += label3_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1000, 636);
+            ClientSize = new Size(875, 477);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(radioButton2);
@@ -262,9 +275,10 @@ namespace WinFormsApp1
             Controls.Add(label1);
             Controls.Add(splitContainer1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(2, 3, 2, 3);
+            Margin = new Padding(2, 2, 2, 2);
             MaximizeBox = false;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Treasure Hunt Solver";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -294,5 +308,6 @@ namespace WinFormsApp1
         private TrackBar trackBar1;
         private TextBox textBox1;
         private Label label4;
+        private Button button3;
     }
 }

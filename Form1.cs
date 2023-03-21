@@ -6,6 +6,7 @@ using System.Net;
 using System.Windows.Forms;
 using System;
 using System.IO;
+using static System.Windows.Forms.DataFormats;
 
 namespace WinFormsApp1
 {
@@ -13,6 +14,7 @@ namespace WinFormsApp1
     public partial class Form1 : Form
     {
         string fileName;
+        bool isProcessRunning = false;
 
         public Form1()
         {
@@ -45,6 +47,9 @@ namespace WinFormsApp1
 
         public async void button1_Click(object sender, EventArgs e)
         {
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Image = Image.FromFile("../../../obj/jason.png");
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             Boolean flag = false;
 
             if (int.TryParse(textBox1.Text, out int values) && values <= 1000)
@@ -59,8 +64,9 @@ namespace WinFormsApp1
 
             int row = 1;
             int col = 0;
-            if (this.fileName != null && flag)
+            if (this.fileName != null && flag && !isProcessRunning)
             {
+                isProcessRunning = true;
                 string filePath = this.fileName;
                 StreamReader reader = new StreamReader(filePath);
                 //Tentuin kolom dan baris
@@ -182,13 +188,10 @@ namespace WinFormsApp1
                     }
                     int dec = (255 / maxCount) - 10;
 
-                    //PictureBox pictureBox = new PictureBox();
-                    //Image image = Image.FromFile("../../../obj/jason.png");
-                    //PictureBox.Image = image;
-
                     foreach (Simpul value in copy)
                     {
                         await Task.Delay(trackBar1.Value);
+                        DataGridViewCell cell = dataGridView1.Rows[value.getX()].Cells[value.getY()];
                         if (dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.White || dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.Gold || dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.Brown)
                         {
                             dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor = Color.FromArgb(0, 255, 0);
@@ -198,17 +201,30 @@ namespace WinFormsApp1
                             int greens = dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor.G - dec;
                             dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor = Color.FromArgb(0, greens, 0);
                         }
-                        //dataGridView1.Rows[value.getX()].Cells[value.getY()].Value = pictureBox.Image;
+
+                        Rectangle cellBounds = dataGridView1.GetCellDisplayRectangle(value.getY(), value.getX(), false);
+                        pictureBox.Size = cellBounds.Size;
+                        pictureBox.Location = new Point(cellBounds.X, cellBounds.Y);
+                        dataGridView1.Controls.Add(pictureBox);
                     }
+                    isProcessRunning = false;
+                    await Task.Delay(1000);
+                    dataGridView1.Controls.Remove(pictureBox);
+
+                }
+                else
+                {
+                    MessageBox.Show("Please choose an algorithm.");
+                    isProcessRunning = false;
                 }
             }
             else if (this.fileName == null)
             {
                 MessageBox.Show("Please input a file.");
             }
-            else if (radioButton1.Checked == false || radioButton2.Checked == false)
+            else if (isProcessRunning)
             {
-                MessageBox.Show("Please select an algorithm.");
+                MessageBox.Show("Please wait until the program is finished.");
             }
         }
 
@@ -364,6 +380,13 @@ namespace WinFormsApp1
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+            this.Hide();
         }
     }
 }
