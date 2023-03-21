@@ -9,24 +9,7 @@ using System.IO;
 
 namespace WinFormsApp1
 {
-    public class RoundButton : Button
-    {
-        protected override void OnPaint(PaintEventArgs pevent)
-        {
-            // Draw a rounded rectangle for the button
-            GraphicsPath path = new GraphicsPath();
-            int radius = 10; // adjust this value to change the roundness
-            path.AddArc(ClientRectangle.Width - radius, 0, radius, radius, 270, 90);
-            path.AddArc(ClientRectangle.Width - radius, ClientRectangle.Height - radius, radius, radius, 0, 90);
-            path.AddArc(0, ClientRectangle.Height - radius, radius, radius, 90, 90);
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            path.CloseFigure();
-            this.Region = new Region(path);
 
-            // Call the base OnPaint method to draw the button text and other elements
-            base.OnPaint(pevent);
-        }
-    }
     public partial class Form1 : Form
     {
         string fileName;
@@ -219,6 +202,14 @@ namespace WinFormsApp1
                     }
                 }
             }
+            else if (this.fileName == null)
+            {
+                MessageBox.Show("Please input a file.");
+            }
+            else if (radioButton1.Checked == false || radioButton2.Checked == false)
+            {
+                MessageBox.Show("Please select an algorithm.");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -368,6 +359,11 @@ namespace WinFormsApp1
             {
                 trackBar1.Value = value;
             }
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
