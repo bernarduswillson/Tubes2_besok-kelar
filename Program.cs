@@ -13,7 +13,7 @@ namespace WinFormsApp1
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1()); int row = 1;
+            Application.Run(new mainForm()); int row = 1;
             int col = 0;
             string filePath = @"../../../test/config.txt";
             StreamReader reader = new StreamReader(filePath);
