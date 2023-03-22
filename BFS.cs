@@ -6,109 +6,35 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1
 {
-        class Paths
+        class BFS
         {
-            private int[,] arr;
+            private Queue<String> path;
+            private bool flag;
+            private Queue<Simpul> coorMap;
+            private Queue<Simpul> result;
+            private Queue<Simpul> progress;
+            private Simpul tempProgress;
+            private int x;
             private int[,] maze;
-            private bool filled;
+            private int[,] visitedMaze;
+            private int y;
             private int count;
-            private int idx;
-            public int[,] getArr()
+            private int countSteps;
+            private int countVisited;
+            public BFS(int x, int y, int[,] arr, int t)
             {
-                return arr;
-            }
-            public Paths(int[,] maze)
-            {
-                this.arr = new int[1,2];
-                this.maze = (int[,])maze.Clone();
-                this.filled = false;
-                this.count = 0;
-                this.idx = -1;
-            }
-            public Paths(Paths other)
-            {
-                this.arr = (int[,])other.arr.Clone();
-                this.maze = (int[,])other.maze.Clone();
-                this.filled = other.filled;
-                this.count = other.count;
-                this.idx = other.idx;
-            }
-            public void displayMaze()
-            {
-                for (int i = 0 ; i<maze.GetLength(0) ; i++)
-                {
-                    for (int j = 0 ;  j < maze.GetLength(1) ; j++)
-                    {
-                        Console.Write(maze[i,j] + " ");
-                    }
-                    Console.WriteLine();
-                }
-            }
-            public bool isVisited(int x, int y)
-            {
-                if (maze[x,y] == -1)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            public void visit(int x, int y)
-            {
-                maze[x,y] = -1;
-            }
-            public void unite(Queue<Paths> p)
-            {
-                bool first = true;
-                int[] tempCoor = new int[2];
-                foreach(Paths value in p)
-                {
-                    if (first)
-                    {
-                        first = false;
-                        for (int i = 0 ; i < value.getArr().GetLength(0) ; i++)
-                        {
-                            tempCoor = value.getEl(i);
-                            this.Append(tempCoor[0],tempCoor[1]);
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 1 ; i < value.getArr().GetLength(0) ; i++)
-                        {
-                            tempCoor = value.getEl(i);
-                            this.Append(tempCoor[0],tempCoor[1]);
-                        }
-                    }
-                }
-            }
-            public void displayCoord()
-            {
-                for (int i = 0 ; i < arr.GetLength(0) ;i++)
-                {
-                    for (int j = 0 ; j < 2 ;j++)
-                    {
-                        Console.Write(arr[i,j] + " ");
-                    }
-                    Console.WriteLine();
-                }
-            }
-            public int getIdx()
-            {
-                return this.idx;
-            }
-            public bool isTreasure(int x, int y)
-            {
-                if (maze[x,y] == 3)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                this.x = x;
+                this.y = y;
+                this.maze = (int[,])arr.Clone();
+                this.countSteps = 0;
+                this.countVisited = 0;
+                this.count = t;
+                this.coorMap = new Queue<Simpul>();
+                this.result = new Queue<Simpul>();
+                this.visitedMaze = (int[,])arr.Clone();
+                this.tempProgress = new Simpul(x,y,maze);
+                this.progress = new Queue<Simpul>();
+                //Lakukan pengecekan pada kanan start
             }
             public bool canTravel(int x, int y)
             {
@@ -128,92 +54,9 @@ namespace WinFormsApp1
                     return false;
                 }
             }
-            public void Append(int a, int b)
-            {
-                if (this.filled)
-                {
-                    // Console.WriteLine(a);
-                    // Console.WriteLine(b);
-                    int[,] temp = new int[this.arr.GetLength(0)+1, this.arr.GetLength(1)];
-                    for (int i = 0; i < arr.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < arr.GetLength(1); j++)
-                        {
-                            temp[i, j] = arr[i, j];
-                        }
-                    }
-                    temp[arr.GetLength(0),0] = a;
-                    temp[arr.GetLength(0),1] = b;
-                    this.arr = temp;
-                }
-                else
-                {
-                    this.arr[0,0] = a;
-                    this.arr[0,1] = b;
-                    this.filled = true;
-                }
-                this.idx++;
-            }
-            public int[] getEl(int idx)
-            {
-                int[] ret = new int[2];
-                ret[0] = this.arr[idx,0];
-                ret[1] = this.arr[idx,1];
-                return ret;
-            }
-            public int[,] getMaze()
-            {
-                return maze;
-            }
-            public void pickTreasure(int x, int y)
-            {
-                this.maze[x,y] = 2;
-                count++;
-            }
-            public int getCount()
-            {
-                return count;
-            }
-        }
-        class BFS
-        {
-            /*
-                1 -> kanan
-                2 -> bawah
-                3 -> kiri
-                4 -> atas
-            */
-            private Queue<String> path;
-            private bool flag;
-            private Queue<Paths> coorMap;
-            private Queue<Paths> result;
-            private Queue<Paths> progress;
-            private Paths tempProgress;
-            private int x;
-            private int[,] maze;
-            private int[,] visitedMaze;
-            private int y;
-            private int count;
-            private int countSteps;
-            private int countVisited;
-            public BFS(int x, int y, int[,] arr, int t)
-            {
-                this.x = x;
-                this.y = y;
-                this.maze = (int[,])arr.Clone();
-                this.countSteps = 0;
-                this.countVisited = 0;
-                this.count = t;
-                this.coorMap = new Queue<Paths>();
-                this.result = new Queue<Paths>();
-                this.visitedMaze = (int[,])arr.Clone();
-                this.tempProgress = new Paths(maze);
-                this.progress = new Queue<Paths>();
-                //Lakukan pengecekan pada kanan start
-            }
             public void init()
             {
-                this.coorMap = new Queue<Paths>();
+                this.coorMap = new Queue<Simpul>();
                 bool found = false;
                 if (!tempProgress.isVisited(x,y))
                 {
@@ -222,7 +65,7 @@ namespace WinFormsApp1
                 }
                 if (this.y+1 < this.maze.GetLength(1) && this.maze[x,y+1] != 0 && ! found)
                 {
-                    Paths temp = new Paths(this.maze);
+                    Simpul temp = new Simpul(x,y,this.maze);
                     temp.Append(x,y);
                     temp.Append(x,y+1);
                     if (!tempProgress.isVisited(x,y+1))
@@ -245,7 +88,7 @@ namespace WinFormsApp1
                 //Lakukan pengecekan pada bawah start        
                 if (this.x+1 < this.maze.GetLength(0) && this.maze[x+1,y] != 0 && !found)
                 {
-                    Paths temp = new Paths(this.maze);
+                    Simpul temp = new Simpul(x,y,this.maze);
                     temp.Append(x,y);
                     temp.Append(x+1,y);
                     if (!tempProgress.isVisited(x+1,y))
@@ -268,7 +111,7 @@ namespace WinFormsApp1
                 //Lakukan pengecekan pada kiri start
                 if (this.y-1 >= 0 && this.maze[x,y-1] != 0 && !found)
                 {
-                    Paths temp = new Paths(this.maze);
+                    Simpul temp = new Simpul(x,y,this.maze);
                     temp.Append(x,y);
                     temp.Append(x,y-1);
                     if (!tempProgress.isVisited(x,y-1))
@@ -291,7 +134,7 @@ namespace WinFormsApp1
                 //Lakukan pengecekan pada atas start        
                 if (this.x-1 >= 0 && this.maze[x-1,y] != 0 && ! found)
                 {
-                    Paths temp = new Paths(this.maze);
+                    Simpul temp = new Simpul(x,y,this.maze);
                     temp.Append(x,y);
                     temp.Append(x-1,y);
                     if (!tempProgress.isVisited(x-1,y))
@@ -332,16 +175,14 @@ namespace WinFormsApp1
             }
             public void findPath()
             {
-                int done = 0;
                 while (true)
                 {
-                    done++;
-                    Paths tempPath = coorMap.Dequeue();
+                    Simpul tempPath = coorMap.Dequeue();
                     int[] tempCoor = tempPath.getEl(tempPath.getIdx());
-                    if (tempPath.canTravel(tempCoor[0],tempCoor[1]+1))
+                    if (canTravel(tempCoor[0],tempCoor[1]+1))
                     {
                         //cek apakah treasure
-                        Paths append = new Paths(tempPath);
+                        Simpul append = new Simpul(tempPath);
                         if (!tempProgress.isVisited(tempCoor[0],tempCoor[1]+1))
                         {
                             this.tempProgress.Append(tempCoor[0],tempCoor[1]+1);
@@ -362,10 +203,10 @@ namespace WinFormsApp1
                         countVisited++;
                     }
                     //cek bagian bawah
-                    if (tempPath.canTravel(tempCoor[0]+1,tempCoor[1]))
+                    if (canTravel(tempCoor[0]+1,tempCoor[1]))
                     {
                         //cek apakah treasure
-                        Paths append = new Paths(tempPath);
+                        Simpul append = new Simpul(tempPath);
                         if (!tempProgress.isVisited(tempCoor[0]+1,tempCoor[1]))
                         {
                             this.tempProgress.Append(tempCoor[0]+1,tempCoor[1]);
@@ -386,10 +227,10 @@ namespace WinFormsApp1
                         countVisited++;
                     }
                     //cek bagian kiri
-                    if (tempPath.canTravel(tempCoor[0],tempCoor[1]-1))
+                    if (canTravel(tempCoor[0],tempCoor[1]-1))
                     {
                         //cek apakah treasure
-                        Paths append = new Paths(tempPath);
+                        Simpul append = new Simpul(tempPath);
                         if (!tempProgress.isVisited(tempCoor[0],tempCoor[1]-1))
                         {
                             this.tempProgress.Append(tempCoor[0],tempCoor[1]-1);
@@ -410,10 +251,10 @@ namespace WinFormsApp1
                         countVisited++;
                     }
                     //cek bagian atas
-                    if (tempPath.canTravel(tempCoor[0]-1,tempCoor[1]))
+                    if (canTravel(tempCoor[0]-1,tempCoor[1]))
                     {
                         //cek apakah treasure
-                        Paths append = new Paths(tempPath);
+                        Simpul append = new Simpul(tempPath);
                         if (!tempProgress.isVisited(tempCoor[0]-1,tempCoor[1]))
                         {
                             this.tempProgress.Append(tempCoor[0]-1,tempCoor[1]);
@@ -444,11 +285,11 @@ namespace WinFormsApp1
                 Progress : progress
                 */
                 int tempCount = 0;
-                tempProgress = new Paths(maze);
+                tempProgress = new Simpul(x,y,maze);
                 this.flag = true;
                 while(tempCount<count)
                 {
-                    tempProgress = new Paths(maze);
+                    tempProgress = new Simpul(x,y,maze);
                     init();
                     if (this.flag)
                     {
@@ -459,12 +300,12 @@ namespace WinFormsApp1
                     tempCount++;
                 }
                 
-                Paths res = new Paths(maze);
+                Simpul res = new Simpul(x,y,maze);
                 res.unite(result);
                 res.displayCoord();
                 
                 Console.WriteLine("Progressnya");
-                foreach(Paths value in progress)
+                foreach(Simpul value in progress)
                 {
                     value.displayCoord();
                     Console.WriteLine("===============");
@@ -475,12 +316,11 @@ namespace WinFormsApp1
             {
                 while (coorMap.Count != 0)
                 {
-                    Paths temp = coorMap.Dequeue();
+                    Simpul temp = coorMap.Dequeue();
                     temp.displayCoord();
                     temp.displayMaze();
                 }
             }
-
             public void getCountVisited()
             {
                 Console.WriteLine(countVisited);
