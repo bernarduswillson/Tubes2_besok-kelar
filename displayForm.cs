@@ -57,9 +57,6 @@ namespace WinFormsApp1
 
         public async void search_Click(object sender, EventArgs e)
         {
-            PictureBox pictureBox = new PictureBox();
-            pictureBox.Image = Image.FromFile("../../../obj/jason.png");
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             Boolean flag = false;
             dataGridView1.CurrentCell = null;
 
@@ -303,7 +300,6 @@ namespace WinFormsApp1
                         reader3.Close();
                     }
                     await Task.Delay(1000);
-                    dataGridView1.Controls.Remove(pictureBox);
                     isProcessRunning = false;
 
                 }
@@ -336,12 +332,10 @@ namespace WinFormsApp1
 
                     foreach (Simpul value in copy)
                     {
-                        Rectangle cellBounds = dataGridView1.GetCellDisplayRectangle(value.getY(), value.getX(), false);
-                        pictureBox.Size = cellBounds.Size;
-                        pictureBox.Location = new Point(cellBounds.X, cellBounds.Y);
-                        dataGridView1.Controls.Add(pictureBox);
+                        dataGridView1.CurrentCell = dataGridView1.Rows[value.getX()].Cells[value.getY()];
+                        dataGridView1.FirstDisplayedScrollingRowIndex = 0;
                         await Task.Delay(1000 - trackBar1.Value);
-                        DataGridViewCell cell = dataGridView1.Rows[value.getX()].Cells[value.getY()];
+                        dataGridView1.CurrentCell = null;
                         if (dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.White || dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.Gold || dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.Pink)
                         {
                             dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor = Color.FromArgb(0, 255, 0);
@@ -353,7 +347,6 @@ namespace WinFormsApp1
                         }
                     }
                     await Task.Delay(1000);
-                    dataGridView1.Controls.Remove(pictureBox);
                     isProcessRunning = false;
 
                 }
@@ -484,9 +477,6 @@ namespace WinFormsApp1
 
         public async void restart_Click(object sender, EventArgs e)
         {
-            PictureBox pictureBox = new PictureBox();
-            pictureBox.Image = Image.FromFile("../../../obj/jason.png");
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             Boolean flag = false;
             dataGridView1.CurrentCell = null;
 
@@ -627,12 +617,10 @@ namespace WinFormsApp1
 
                     foreach (Simpul value in copy)
                     {
-                        Rectangle cellBounds = dataGridView1.GetCellDisplayRectangle(value.getY(), value.getX(), false);
-                        pictureBox.Size = cellBounds.Size;
-                        pictureBox.Location = new Point(cellBounds.X, cellBounds.Y);
-                        dataGridView1.Controls.Add(pictureBox);
+                        dataGridView1.CurrentCell = dataGridView1.Rows[value.getX()].Cells[value.getY()];
+                        dataGridView1.FirstDisplayedScrollingRowIndex = 0;
                         await Task.Delay(1000 - trackBar1.Value);
-                        DataGridViewCell cell = dataGridView1.Rows[value.getX()].Cells[value.getY()];
+                        dataGridView1.CurrentCell = null;
                         if (dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.White || dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.Gold || dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor == Color.Pink)
                         {
                             dataGridView1.Rows[value.getX()].Cells[value.getY()].Style.BackColor = Color.FromArgb(0, 255, 0);
@@ -645,7 +633,6 @@ namespace WinFormsApp1
 
                     }
                     await Task.Delay(1000);
-                    dataGridView1.Controls.Remove(pictureBox);
                     isProcessRunning = false;
 
                 }
@@ -662,9 +649,6 @@ namespace WinFormsApp1
 
         public async void Route_Click(object sender, EventArgs e)
         {
-            PictureBox pictureBox = new PictureBox();
-            pictureBox.Image = Image.FromFile("../../../obj/jason.png");
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             Boolean flag = false;
             dataGridView1.CurrentCell = null;
 
@@ -801,12 +785,10 @@ namespace WinFormsApp1
 
                     foreach ((int xs, int ys) in res.getArr())
                     {
-                        Rectangle cellBounds = dataGridView1.GetCellDisplayRectangle(ys, xs, false);
-                        pictureBox.Size = cellBounds.Size;
-                        pictureBox.Location = new Point(cellBounds.X, cellBounds.Y);
-                        dataGridView1.Controls.Add(pictureBox);
+                        dataGridView1.CurrentCell = dataGridView1.Rows[xs].Cells[ys];
+                        dataGridView1.FirstDisplayedScrollingRowIndex = 0;
                         await Task.Delay(1000 - trackBar1.Value);
-                        dataGridView1.Controls.Remove(pictureBox);
+                        dataGridView1.CurrentCell = null;
                         DataGridViewCell cell = dataGridView1.Rows[xs].Cells[ys];
                         if (dataGridView1.Rows[xs].Cells[ys].Style.BackColor == Color.White || dataGridView1.Rows[xs].Cells[ys].Style.BackColor == Color.Gold || dataGridView1.Rows[xs].Cells[ys].Style.BackColor == Color.Pink)
                         {
@@ -819,7 +801,6 @@ namespace WinFormsApp1
                         }
                     }
                     await Task.Delay(1000);
-                    dataGridView1.Controls.Remove(pictureBox);
                     isProcessRunning = false;
                 }
             }
