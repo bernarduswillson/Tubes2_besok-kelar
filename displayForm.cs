@@ -339,6 +339,11 @@ namespace WinFormsApp1
                             idCol = 0;
                         }
                     }
+                    else if (c != ' ' && c != '\r' && c != '\n')
+                    {
+                        MessageBox.Show("The map that you inserted doesn't match the format, please try again");
+                        break;
+                    }
                 }
                 reader.Close();
                 reader2.Close();
