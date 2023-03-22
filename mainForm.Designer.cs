@@ -33,6 +33,8 @@
             Choose = new Button();
             BFS = new RadioButton();
             DFS = new RadioButton();
+            checkBox1 = new CheckBox();
+            name = new Label();
             SuspendLayout();
             // 
             // startButton
@@ -45,9 +47,10 @@
             startButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             startButton.FlatStyle = FlatStyle.Flat;
             startButton.ForeColor = Color.Transparent;
-            startButton.Location = new Point(280, 367);
+            startButton.Location = new Point(454, 624);
+            startButton.Margin = new Padding(3, 4, 3, 4);
             startButton.Name = "startButton";
-            startButton.Size = new Size(241, 42);
+            startButton.Size = new Size(383, 74);
             startButton.TabIndex = 0;
             startButton.UseVisualStyleBackColor = false;
             startButton.Click += startButton_Click;
@@ -62,9 +65,10 @@
             Choose.FlatAppearance.MouseOverBackColor = Color.Transparent;
             Choose.FlatStyle = FlatStyle.Flat;
             Choose.ForeColor = Color.Transparent;
-            Choose.Location = new Point(206, 137);
+            Choose.Location = new Point(334, 236);
+            Choose.Margin = new Padding(3, 4, 3, 4);
             Choose.Name = "Choose";
-            Choose.Size = new Size(374, 45);
+            Choose.Size = new Size(599, 72);
             Choose.TabIndex = 1;
             Choose.UseVisualStyleBackColor = false;
             Choose.Click += Choose_Click;
@@ -73,9 +77,10 @@
             // 
             BFS.AutoSize = true;
             BFS.BackColor = Color.Transparent;
-            BFS.Location = new Point(262, 213);
+            BFS.Location = new Point(435, 366);
+            BFS.Margin = new Padding(3, 4, 3, 4);
             BFS.Name = "BFS";
-            BFS.Size = new Size(14, 13);
+            BFS.Size = new Size(17, 16);
             BFS.TabIndex = 2;
             BFS.TabStop = true;
             BFS.UseVisualStyleBackColor = false;
@@ -85,27 +90,56 @@
             // 
             DFS.AutoSize = true;
             DFS.BackColor = Color.Transparent;
-            DFS.Location = new Point(262, 263);
+            DFS.Location = new Point(435, 450);
+            DFS.Margin = new Padding(3, 4, 3, 4);
             DFS.Name = "DFS";
-            DFS.Size = new Size(14, 13);
+            DFS.Size = new Size(17, 16);
             DFS.TabIndex = 3;
             DFS.TabStop = true;
             DFS.UseVisualStyleBackColor = false;
             DFS.CheckedChanged += DFS_CheckedChanged;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.BackColor = Color.Transparent;
+            checkBox1.Location = new Point(815, 567);
+            checkBox1.Margin = new Padding(3, 4, 3, 4);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(18, 17);
+            checkBox1.TabIndex = 4;
+            checkBox1.UseVisualStyleBackColor = false;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // name
+            // 
+            name.AutoSize = true;
+            name.BackColor = Color.Transparent;
+            name.Font = new Font("Candara", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            name.ForeColor = Color.White;
+            name.Location = new Point(397, 306);
+            name.Name = "name";
+            name.Size = new Size(154, 28);
+            name.TabIndex = 5;
+            name.Text = "File Name: .txt";
+            name.Click += name_Click;
+            // 
             // mainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(784, 461);
+            ClientSize = new Size(1262, 785);
+            Controls.Add(name);
+            Controls.Add(checkBox1);
             Controls.Add(DFS);
             Controls.Add(BFS);
             Controls.Add(Choose);
             Controls.Add(startButton);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "mainForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -120,5 +154,7 @@
         private Button Choose;
         private RadioButton BFS;
         private RadioButton DFS;
+        private CheckBox checkBox1;
+        private Label name;
     }
 }
