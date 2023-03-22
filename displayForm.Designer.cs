@@ -65,7 +65,7 @@
             dataGridViewCellStyle2.BackColor = Color.Transparent;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Transparent;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = Color.Transparent;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
@@ -82,7 +82,7 @@
             dataGridView1.ShowEditingIcon = false;
             dataGridView1.ShowRowErrors = false;
             dataGridView1.Size = new Size(606, 528);
-            dataGridView1.TabIndex = 1;
+            dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick_1;
             // 
             // label4
@@ -136,6 +136,7 @@
             Route.Size = new Size(253, 63);
             Route.TabIndex = 8;
             Route.UseVisualStyleBackColor = false;
+            Route.Click += Route_Click;
             // 
             // search
             // 

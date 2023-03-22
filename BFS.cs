@@ -325,5 +325,15 @@ namespace WinFormsApp1
             {
                 Console.WriteLine(countVisited);
             }
+
+            public Queue<Simpul> getResult()
+            {
+                return this.result;
+            }
+
+            public Queue<Simpul> getProgress()
+            {
+                return this.progress;
+            }
         }
 }
