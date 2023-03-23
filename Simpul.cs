@@ -119,9 +119,24 @@ namespace WinFormsApp1
                 return false;
             }
         }
+        public bool isVisitedHome(int x, int y)
+        {
+            if (maze[x, y] == -2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public void visit(int x, int y)
         {
             maze[x,y] = -1;
+        }
+        public void visitHome(int x, int y)
+        {
+            maze[x,y] = -2;
         }
         public List<(int,int)> getArr()
         {
@@ -172,6 +187,11 @@ namespace WinFormsApp1
             {
                 return false;
             }
+        }
+        public bool isHome(int x, int y)
+        {
+            if (maze[x, y] == 1)    { return true; }
+            else                    { return false; }
         }
         public int getIdx()
         {

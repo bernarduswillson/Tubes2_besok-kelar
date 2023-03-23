@@ -17,6 +17,7 @@ namespace WinFormsApp1
         public static string fileName;
         public static bool BFSbool = false;
         public static bool DFSbool = false;
+        public static bool TSPbool = false;
         bool solveable = true;
         public mainForm()
         {
@@ -46,7 +47,6 @@ namespace WinFormsApp1
             }
         }
 
-
         private void DFS_CheckedChanged(object sender, EventArgs e)
         {
             if (DFS.Checked)
@@ -54,6 +54,15 @@ namespace WinFormsApp1
                 DFSbool = true;
             }
         }
+
+        private void TSP_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TSP.Checked)
+            {
+                TSPbool = true;
+            }
+        }
+
         private void startButton_Click(object sender, EventArgs e)
         {
             if (fileName != null)
@@ -122,11 +131,6 @@ namespace WinFormsApp1
         }
 
         private void name_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }

@@ -9,6 +9,7 @@ namespace WinFormsApp1
     class DFS
     {
         private Stack<Simpul> visited;
+        private Stack<Simpul> visitedHome;
         private Stack<Simpul> result;
         private int count;
         private int countSteps;
@@ -21,6 +22,7 @@ namespace WinFormsApp1
         public DFS(int x, int y, int total, int[,] maze)
         {
             this.visited = new Stack<Simpul>();
+            this.visitedHome = new Stack<Simpul>();
             this.result = new Stack<Simpul>();
             this.x = x;
             this.y = y;
@@ -31,6 +33,86 @@ namespace WinFormsApp1
             this.countSteps = 0;
             this.countVisited = 0;
         }
+        public void findHome()
+        {
+            findPath();
+            Simpul first = new Simpul(visited.Peek());
+            visitedMaze[first.getX(), first.getY()] = -2;
+            visitedHome.Push(first);
+            result.Push(first);
+
+            Simpul top;
+            bool valid;
+            while (true)
+            {
+                valid = true;
+                top = new Simpul(visitedHome.Pop());
+                if (top.isHome(top.getX(), top.getY()))
+                {
+                    visitedHome.Push(top);
+                    break;
+                }
+                if (top.canGoRight && valid)
+                {
+                    if (visitedMaze[top.getX(), top.getY() + 1] != -2)
+                    {
+                        top.canGoRight = false;
+                        Simpul temp = new Simpul(top.getX(), top.getY() + 1, maze);
+                        visitedHome.Push(top);
+                        visitedHome.Push(temp);
+                        result.Push(temp);
+                        visitedMaze[top.getX(), top.getY() + 1] = -2;
+                        valid = false;
+                    }
+                }
+                if (top.canGoDown && valid)
+                {
+                    if (visitedMaze[top.getX() + 1, top.getY()] != -2)
+                    {
+                        top.canGoDown = false;
+                        Simpul temp = new Simpul(top.getX() + 1, top.getY(), maze);
+                        visitedHome.Push(top);
+                        visitedHome.Push(temp);
+                        result.Push(temp);
+                        visitedMaze[top.getX() + 1, top.getY()] = -2;
+                        valid = false;
+                    }
+                }
+                if (top.canGoLeft && valid)
+                {
+                    if (visitedMaze[top.getX(), top.getY() - 1] != -2)
+                    {
+                        top.canGoLeft = false;
+                        Simpul temp = new Simpul(top.getX(), top.getY() - 1, maze);
+                        visitedHome.Push(top);
+                        visitedHome.Push(temp);
+                        result.Push(temp);
+                        visitedMaze[top.getX(), top.getY() - 1] = -2;
+                        valid = false;
+                    }
+                }
+                if (top.canGoUp && valid)
+                {
+                    if (visitedMaze[top.getX() - 1, top.getY()] != -2)
+                    {
+                        top.canGoUp = false;
+                        Simpul temp = new Simpul(top.getX() - 1, top.getY(), maze);
+                        visitedHome.Push(top);
+                        visitedHome.Push(temp);
+                        result.Push(temp);
+                        visitedMaze[top.getX() - 1, top.getY()] = -2;
+                        valid = false;
+                    }
+                }
+                if (valid)
+                {
+                    visitedHome.Push(top);
+                    top = visitedHome.Pop();
+                    result.Push(visitedHome.Peek());
+                }
+            }
+        }
+        
         public void findPath()
         {
             Simpul first = new Simpul(this.x, this.y, maze);

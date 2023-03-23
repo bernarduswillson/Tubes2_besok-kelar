@@ -21,6 +21,7 @@ namespace WinFormsApp1
             private int count;
             private int countSteps;
             private int countVisited;
+            private bool goHome;
             public BFS(int x, int y, int[,] arr, int t)
             {
                 this.x = x;
@@ -34,6 +35,7 @@ namespace WinFormsApp1
                 this.visitedMaze = (int[,])arr.Clone();
                 this.tempProgress = new Simpul(x,y,maze);
                 this.progress = new Queue<Simpul>();
+                this.goHome = false;
                 //Lakukan pengecekan pada kanan start
             }
             public bool canTravel(int x, int y)
@@ -53,6 +55,97 @@ namespace WinFormsApp1
                 {
                     return false;
                 }
+            }
+            public void initHome()
+            {
+                this.coorMap = new Queue<Simpul>();
+                bool found = false;
+                if (!tempProgress.isVisitedHome(x,y))
+                {
+                    tempProgress.Append(x,y);
+                    tempProgress.visitHome(x,y);
+                }
+                //Lakukan pengecekan pada atas start
+                if (this.y+1 < this.maze.GetLength(1) && this.maze[x,y+1] != 0 && ! found)
+                {
+                    Simpul temp = new Simpul(x,y,this.maze);
+                    temp.Append(x,y);
+                    temp.Append(x,y+1);
+                    if (!tempProgress.isVisitedHome(x,y+1))
+                    {
+                        this.tempProgress.Append(x,y+1);
+                    }
+                    tempProgress.visitHome(x,y+1);
+                    if(this.maze[x,y+1] == 1)
+                    {
+                        found = true;
+                        result.Enqueue(temp);
+                        this.flag = false;
+                        coorMap.Clear();
+                    }
+                    coorMap.Enqueue(temp);
+                }
+                //Lakukan pengecekan pada bawah start
+                if (this.x+1 < this.maze.GetLength(0) && this.maze[x+1,y] != 0 && ! found)
+                {
+                    Simpul temp = new Simpul(x,y,this.maze);
+                    temp.Append(x,y);
+                    temp.Append(x+1,y);
+                    if (!tempProgress.isVisitedHome(x+1,y))
+                    {
+                        this.tempProgress.Append(x+1,y);
+                    }
+                    tempProgress.visitHome(x+1,y);
+                    if(this.maze[x+1,y] == 1)
+                    {
+                        found = true;
+                        result.Enqueue(temp);
+                        this.flag = false;
+                        coorMap.Clear();
+                    }
+                    coorMap.Enqueue(temp);
+                }
+                //Lakukan pengecekan pada kiri start
+                if (this.y-1 >= 0 && this.maze[x,y-1] != 0 && ! found)
+                {
+                    Simpul temp = new Simpul(x,y,this.maze);
+                    temp.Append(x,y);
+                    temp.Append(x,y-1);
+                    if (!tempProgress.isVisitedHome(x,y-1))
+                    {
+                        this.tempProgress.Append(x,y-1);
+                    }
+                    tempProgress.visitHome(x,y-1);
+                    if(this.maze[x,y-1] == 1)
+                    {
+                        found = true;
+                        result.Enqueue(temp);
+                        this.flag = false;
+                        coorMap.Clear();
+                    }
+                    coorMap.Enqueue(temp);
+                }
+                //Lakukan pengecekan pada atas start
+                if (this.x-1 >= 0 && this.maze[x-1,y] != 0 && ! found)
+                {
+                    Simpul temp = new Simpul(x,y,this.maze);
+                    temp.Append(x,y);
+                    temp.Append(x-1,y);
+                    if (!tempProgress.isVisitedHome(x-1,y))
+                    {
+                        this.tempProgress.Append(x-1,y);
+                    }
+                    tempProgress.visitHome(x-1,y);
+                    if(this.maze[x-1,y] == 1)
+                    {
+                        found = true;
+                        result.Enqueue(temp);
+                        this.flag = false;
+                        coorMap.Clear();
+                    }
+                    coorMap.Enqueue(temp);
+                }
+                
             }
             public void init()
             {
@@ -96,7 +189,7 @@ namespace WinFormsApp1
                         this.tempProgress.Append(x+1,y);
                     }
                     tempProgress.visit(x+1,y);
-                    if(this.maze[x+1,y] == 3)
+                    if(this.maze[x+1,y] == 3 && !goHome)
                     {
                         temp.pickTreasure(x+1,y);
                         found = true;
@@ -105,6 +198,12 @@ namespace WinFormsApp1
                         this.maze = (int[,])temp.getMaze().Clone();
                         this.flag = false;
                         coorMap.Clear();
+                    }
+                    else if (this.maze[x + 1, y] == 1 && goHome)
+                    {
+                        found = true;
+                        result.Enqueue(temp);
+                        this.flag = false;
                     }
                     coorMap.Enqueue(temp);
                 }
@@ -119,7 +218,7 @@ namespace WinFormsApp1
                         this.tempProgress.Append(x,y-1);
                     }
                     tempProgress.visit(x,y-1);
-                    if(this.maze[x,y-1] == 3)
+                    if(this.maze[x,y-1] == 3 && !goHome)
                     {
                         temp.pickTreasure(x,y-1);
                         found = true;
@@ -128,6 +227,12 @@ namespace WinFormsApp1
                         this.y = y-1;
                         this.flag = false;
                         coorMap.Clear();
+                    }
+                    else if (this.maze[x, y - 1] == 1 && goHome)
+                    {
+                        found = true;
+                        result.Enqueue(temp);
+                        this.flag = false;
                     }
                     this.coorMap.Enqueue(temp);
                 }
@@ -142,7 +247,7 @@ namespace WinFormsApp1
                         this.tempProgress.Append(x-1,y);
                     }
                     tempProgress.visit(x-1,y);
-                    if(this.maze[x-1,y] == 3)
+                    if(this.maze[x-1,y] == 3 && !goHome)
                     {
                         temp.pickTreasure(x-1,y);
                         found = true;
@@ -151,6 +256,12 @@ namespace WinFormsApp1
                         this.flag = false;
                         this.maze = (int[,])temp.getMaze().Clone();
                         coorMap.Clear();
+                    }
+                    else if (this.maze[x - 1, y] == 1 && goHome)
+                    {
+                        found = true;
+                        result.Enqueue(temp);
+                        this.flag = false;
                     }
                     coorMap.Enqueue(temp); 
                 }
@@ -173,6 +284,15 @@ namespace WinFormsApp1
                 }
                 return true;
             }
+            // public void findHome()
+            // {
+            //     while (true)
+            //     {
+            //         Simpul tempPath = coorMap.Dequeue();
+            //         int [] tempCoor = tempPath.getEl(tempPath.getIdx());
+
+            //     }
+            // }
             public void findPath()
             {
                 while (true)
@@ -183,22 +303,40 @@ namespace WinFormsApp1
                     {
                         //cek apakah treasure
                         Simpul append = new Simpul(tempPath);
-                        if (!tempProgress.isVisited(tempCoor[0],tempCoor[1]+1))
+                        if (goHome) 
                         {
-                            this.tempProgress.Append(tempCoor[0],tempCoor[1]+1);
+                            if (!tempProgress.isVisitedHome(tempCoor[0],tempCoor[1]+1))
+                            {
+                                this.tempProgress.Append(tempCoor[0],tempCoor[1]+1);
+                            }
+                            tempProgress.visitHome(tempCoor[0],tempCoor[1]+1);
+                            append.Append(tempCoor[0],tempCoor[1]+1);
+                            if (append.isHome(tempCoor[0], tempCoor[1] + 1) && goHome)
+                            {
+                                result.Enqueue(append);
+                                break;
+                            }
                         }
-                        tempProgress.visit(tempCoor[0],tempCoor[1]+1);
-                        append.Append(tempCoor[0],tempCoor[1]+1);
-                        if (append.isTreasure(tempCoor[0],tempCoor[1]+1))
+                        else
                         {
-                            append.pickTreasure(tempCoor[0],tempCoor[1]+1);
-                            result.Enqueue(append);
-                            coorMap.Clear();
-                            this.x = tempCoor[0];
-                            this.y = tempCoor[1] + 1;
-                            this.maze = (int[,])append.getMaze().Clone();
-                            break;
+                            if (!tempProgress.isVisited(tempCoor[0],tempCoor[1]+1))
+                            {
+                                this.tempProgress.Append(tempCoor[0],tempCoor[1]+1);
+                            }
+                            tempProgress.visit(tempCoor[0],tempCoor[1]+1);
+                            append.Append(tempCoor[0],tempCoor[1]+1);
+                            if (append.isTreasure(tempCoor[0],tempCoor[1]+1))
+                            {
+                                append.pickTreasure(tempCoor[0],tempCoor[1]+1);
+                                result.Enqueue(append);
+                                coorMap.Clear();
+                                this.x = tempCoor[0];
+                                this.y = tempCoor[1] + 1;
+                                this.maze = (int[,])append.getMaze().Clone();
+                                break;
+                            }
                         }
+                        
                         coorMap.Enqueue(append);
                         countVisited++;
                     }
@@ -207,21 +345,38 @@ namespace WinFormsApp1
                     {
                         //cek apakah treasure
                         Simpul append = new Simpul(tempPath);
-                        if (!tempProgress.isVisited(tempCoor[0]+1,tempCoor[1]))
+                        if (goHome) 
                         {
-                            this.tempProgress.Append(tempCoor[0]+1,tempCoor[1]);
+                            if (!tempProgress.isVisitedHome(tempCoor[0] + 1,tempCoor[1]))
+                            {
+                                this.tempProgress.Append(tempCoor[0] + 1,tempCoor[1]);
+                            }
+                            tempProgress.visitHome(tempCoor[0] + 1,tempCoor[1]);
+                            append.Append(tempCoor[0] + 1,tempCoor[1]);
+                            if (append.isHome(tempCoor[0] + 1, tempCoor[1]) && goHome)
+                            {
+                                result.Enqueue(append);
+                                break;
+                            }
                         }
-                        tempProgress.visit(tempCoor[0]+1,tempCoor[1]);
-                        append.Append(tempCoor[0]+1,tempCoor[1]);
-                        if (append.isTreasure(tempCoor[0]+1,tempCoor[1]))
+                        else
                         {
-                            append.pickTreasure(tempCoor[0]+1,tempCoor[1]);
-                            result.Enqueue(append);
-                            coorMap.Clear();
-                            this.maze = (int[,])append.getMaze().Clone();
-                            this.x = tempCoor[0] + 1;
-                            this.y = tempCoor[1];
-                            break;
+                            if (!tempProgress.isVisited(tempCoor[0]+1,tempCoor[1]))
+                            {
+                                this.tempProgress.Append(tempCoor[0]+1,tempCoor[1]);
+                            }
+                            tempProgress.visit(tempCoor[0]+1,tempCoor[1]);
+                            append.Append(tempCoor[0]+1,tempCoor[1]);
+                            if (append.isTreasure(tempCoor[0]+1,tempCoor[1]))
+                            {
+                                append.pickTreasure(tempCoor[0]+1,tempCoor[1]);
+                                result.Enqueue(append);
+                                coorMap.Clear();
+                                this.maze = (int[,])append.getMaze().Clone();
+                                this.x = tempCoor[0] + 1;
+                                this.y = tempCoor[1];
+                                break;
+                            }
                         }
                         coorMap.Enqueue(append);
                         countVisited++;
@@ -231,21 +386,38 @@ namespace WinFormsApp1
                     {
                         //cek apakah treasure
                         Simpul append = new Simpul(tempPath);
-                        if (!tempProgress.isVisited(tempCoor[0],tempCoor[1]-1))
+                        if (goHome) 
                         {
-                            this.tempProgress.Append(tempCoor[0],tempCoor[1]-1);
+                            if (!tempProgress.isVisitedHome(tempCoor[0], tempCoor[1] - 1))
+                            {
+                                this.tempProgress.Append(tempCoor[0], tempCoor[1] - 1);
+                            }
+                            tempProgress.visitHome(tempCoor[0], tempCoor[1] - 1);
+                            append.Append(tempCoor[0], tempCoor[1] - 1);
+                            if (append.isHome(tempCoor[0],  tempCoor[1] - 1) && goHome)
+                            {
+                                result.Enqueue(append);
+                                break;
+                            }
                         }
-                        tempProgress.visit(tempCoor[0],tempCoor[1]-1);
-                        append.Append(tempCoor[0],tempCoor[1]-1);
-                        if (append.isTreasure(tempCoor[0],tempCoor[1]-1))
+                        else
                         {
-                            append.pickTreasure(tempCoor[0],tempCoor[1]-1);
-                            result.Enqueue(append);
-                            coorMap.Clear();
-                            this.maze = (int[,])append.getMaze().Clone();
-                            this.x = tempCoor[0];
-                            this.y = tempCoor[1] - 1;
-                            break;
+                            if (!tempProgress.isVisited(tempCoor[0],tempCoor[1]-1))
+                            {
+                                this.tempProgress.Append(tempCoor[0],tempCoor[1]-1);
+                            }
+                            tempProgress.visit(tempCoor[0],tempCoor[1]-1);
+                            append.Append(tempCoor[0],tempCoor[1]-1);
+                            if (append.isTreasure(tempCoor[0],tempCoor[1]-1))
+                            {
+                                append.pickTreasure(tempCoor[0],tempCoor[1]-1);
+                                result.Enqueue(append);
+                                coorMap.Clear();
+                                this.maze = (int[,])append.getMaze().Clone();
+                                this.x = tempCoor[0];
+                                this.y = tempCoor[1] - 1;
+                                break;
+                            }
                         }
                         coorMap.Enqueue(append);
                         countVisited++;
@@ -255,27 +427,57 @@ namespace WinFormsApp1
                     {
                         //cek apakah treasure
                         Simpul append = new Simpul(tempPath);
-                        if (!tempProgress.isVisited(tempCoor[0]-1,tempCoor[1]))
+                        if (goHome) 
                         {
-                            this.tempProgress.Append(tempCoor[0]-1,tempCoor[1]);
+                            if (!tempProgress.isVisitedHome(tempCoor[0] - 1,tempCoor[1]))
+                            {
+                                this.tempProgress.Append(tempCoor[0] - 1,tempCoor[1]);
+                            }
+                            tempProgress.visitHome(tempCoor[0] - 1,tempCoor[1]);
+                            append.Append(tempCoor[0] - 1,tempCoor[1]);
+                            if (append.isHome(tempCoor[0] - 1, tempCoor[1]) && goHome)
+                            {
+                                result.Enqueue(append);
+                                break;
+                            }
                         }
-                        tempProgress.visit(tempCoor[0]-1,tempCoor[1]);
-                        append.Append(tempCoor[0]-1,tempCoor[1]);
-                        if (append.isTreasure(tempCoor[0]-1,tempCoor[1]))
+                        else
                         {
-                            append.pickTreasure(tempCoor[0]-1,tempCoor[1]);
-                            result.Enqueue(append);
-                            coorMap.Clear();
-                            this.maze = (int[,])append.getMaze().Clone();
-                            this.x = tempCoor[0]-1;
-                            this.y = tempCoor[1];
-                            break;
+                            if (!tempProgress.isVisited(tempCoor[0]-1,tempCoor[1]))
+                            {
+                                this.tempProgress.Append(tempCoor[0]-1,tempCoor[1]);
+                            }
+                            tempProgress.visit(tempCoor[0]-1,tempCoor[1]);
+                            append.Append(tempCoor[0]-1,tempCoor[1]);
+                            if (append.isTreasure(tempCoor[0]-1,tempCoor[1]))
+                            {
+                                append.pickTreasure(tempCoor[0]-1,tempCoor[1]);
+                                result.Enqueue(append);
+                                coorMap.Clear();
+                                this.maze = (int[,])append.getMaze().Clone();
+                                this.x = tempCoor[0]-1;
+                                this.y = tempCoor[1];
+                                break;
+                            }
                         }
                         coorMap.Enqueue(append);
                         countVisited++;
                     }
                     // Console.WriteLine(countVisited);
                 }
+            }
+            public void finalTSP()
+            {
+                finalSearch();
+                goHome = true;
+                tempProgress = new Simpul(x,y,maze);
+                this.flag = true;
+                initHome();
+                findPath();
+                progress.Enqueue(tempProgress);
+                Simpul res = new Simpul(x,y,maze);
+                res.unite(result);
+
             }
             public void finalSearch()
             {
