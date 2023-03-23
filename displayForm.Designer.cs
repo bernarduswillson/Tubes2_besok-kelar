@@ -41,7 +41,7 @@
             search = new Button();
             back = new Button();
             show = new Button();
-            restart = new Button();
+            runtime = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
@@ -61,12 +61,12 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.Transparent;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new Font("Impact", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Transparent;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -91,11 +91,12 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Impact", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(220, 179);
+            label4.Location = new Point(220, 178);
             label4.Name = "label4";
-            label4.Size = new Size(31, 22);
+            label4.Size = new Size(17, 22);
             label4.TabIndex = 7;
-            label4.Text = "ms";
+            label4.Text = "x";
+            label4.Click += label4_Click;
             // 
             // textBox1
             // 
@@ -103,7 +104,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(66, 27);
             textBox1.TabIndex = 6;
-            textBox1.Text = "1000";
+            textBox1.Text = "1,00";
             textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -113,11 +114,13 @@
             trackBar1.Cursor = Cursors.Hand;
             trackBar1.Location = new Point(151, 209);
             trackBar1.Maximum = 1000;
+            trackBar1.Minimum = 100;
             trackBar1.Name = "trackBar1";
             trackBar1.RightToLeft = RightToLeft.No;
             trackBar1.Size = new Size(402, 56);
             trackBar1.TabIndex = 5;
             trackBar1.TickStyle = TickStyle.None;
+            trackBar1.Value = 100;
             trackBar1.Scroll += trackBar1_Scroll;
             // 
             // Route
@@ -192,23 +195,17 @@
             show.UseVisualStyleBackColor = false;
             show.Click += show_Click;
             // 
-            // restart
+            // runtime
             // 
-            restart.BackColor = Color.Transparent;
-            restart.BackgroundImageLayout = ImageLayout.Center;
-            restart.Cursor = Cursors.Hand;
-            restart.FlatAppearance.BorderSize = 0;
-            restart.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            restart.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            restart.FlatStyle = FlatStyle.Flat;
-            restart.ForeColor = Color.Transparent;
-            restart.Location = new Point(1152, 30);
-            restart.Margin = new Padding(3, 4, 3, 4);
-            restart.Name = "restart";
-            restart.Size = new Size(66, 62);
-            restart.TabIndex = 12;
-            restart.UseVisualStyleBackColor = false;
-            restart.Click += restart_Click;
+            runtime.AutoSize = true;
+            runtime.BackColor = Color.Transparent;
+            runtime.Font = new Font("Impact", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            runtime.Location = new Point(179, 670);
+            runtime.Name = "runtime";
+            runtime.Size = new Size(19, 28);
+            runtime.TabIndex = 12;
+            runtime.Text = "-";
+            runtime.Click += runtime_Click;
             // 
             // displayForm
             // 
@@ -218,7 +215,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1262, 785);
-            Controls.Add(restart);
+            Controls.Add(runtime);
             Controls.Add(show);
             Controls.Add(back);
             Controls.Add(search);
@@ -249,6 +246,6 @@
         private Button search;
         private Button back;
         private Button show;
-        private Button restart;
+        private Label runtime;
     }
 }

@@ -56,50 +56,53 @@ namespace WinFormsApp1
         }
         private void startButton_Click(object sender, EventArgs e)
         {
-            string filePath = mainForm.fileName;
-            StreamReader reader = new StreamReader(filePath);
-            //Tentuin kolom dan baris
-            int row = 1;
-            int col = 0;
-            String line = reader.ReadLine();
-            foreach (char c in line)
+            if (fileName != null)
             {
-                if (c != ' ')
+                string filePath = mainForm.fileName;
+                StreamReader reader = new StreamReader(filePath);
+                //Tentuin kolom dan baris
+                int row = 1;
+                int col = 0;
+                String line = reader.ReadLine();
+                foreach (char c in line)
                 {
-                    col++;
-                }
-            }
-            while ((line = reader.ReadLine()) != null)
-            {
-                row++;
-            }
-            int[,] arr = new int[row, col];
-            int charCode;
-            int idRow = 0;
-            int idCol = 0;
-            StreamReader reader2 = new StreamReader(filePath);
-            while ((charCode = reader2.Read()) != -1)
-            {
-                char c = (char)charCode;
-                if (idRow == row)
-                {
-                    break;
-                }
-                if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
-                {
-                    solveable = true;
-                    idCol++;
-                    if (idCol == col)
+                    if (c != ' ')
                     {
-                        idRow++;
-                        idCol = 0;
+                        col++;
                     }
                 }
-                else if (c != ' ' && c != '\r' && c != '\n')
+                while ((line = reader.ReadLine()) != null)
                 {
-                    MessageBox.Show("The map that you inserted doesn't match the format, please try again");
-                    solveable = false;
-                    break;
+                    row++;
+                }
+                int[,] arr = new int[row, col];
+                int charCode;
+                int idRow = 0;
+                int idCol = 0;
+                StreamReader reader2 = new StreamReader(filePath);
+                while ((charCode = reader2.Read()) != -1)
+                {
+                    char c = (char)charCode;
+                    if (idRow == row)
+                    {
+                        break;
+                    }
+                    if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
+                    {
+                        solveable = true;
+                        idCol++;
+                        if (idCol == col)
+                        {
+                            idRow++;
+                            idCol = 0;
+                        }
+                    }
+                    else if (c != ' ' && c != '\r' && c != '\n')
+                    {
+                        MessageBox.Show("The map that you inserted doesn't match the format, please try again");
+                        solveable = false;
+                        break;
+                    }
                 }
             }
             if ((DFSbool || BFSbool) && fileName != null && solveable)
