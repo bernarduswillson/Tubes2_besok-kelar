@@ -321,10 +321,6 @@ namespace WinFormsApp1
                     temp.displayMaze();
                 }
             }
-            public void getCountVisited()
-            {
-                Console.WriteLine(countVisited);
-            }
 
             public Queue<Simpul> getResult()
             {
@@ -334,6 +330,44 @@ namespace WinFormsApp1
             public Queue<Simpul> getProgress()
             {
                 return this.progress;
+            }
+            public int getStep()
+            {
+                Simpul res = new Simpul(x,y,maze);
+                res.unite(result);
+                return res.getArr().Count()-1;
+            }
+            public String getRoute()
+            {
+                String res = "";
+                Simpul route = new Simpul(x,y,maze);
+                route.unite(result);
+                for (int i = 1; i < route.getArr().Count() ; i++)
+                {
+                    var (px, py) = route.getArr()[i-1];
+                    var (x,y) = route.getArr()[i];
+                    if (x-px == 1)
+                    {
+                        res+="D";
+                    }
+                    else if (x-px == -1)
+                    {
+                        res+="U";
+                    }
+                    else if(y-py == 1)
+                    {
+                        res+="R";
+                    }
+                    else if (y-py == -1)
+                    {
+                        res+="L";
+                    }
+                }
+                return res;
+            }
+            public int getCountVisited()
+            {
+                return countVisited;
             }
         }
 }

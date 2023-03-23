@@ -154,5 +154,53 @@ namespace WinFormsApp1
         {
             return this.result;
         }
+        public String getRoute()
+        {
+            String ret = "";
+            Stack<Simpul> copy = new Stack<Simpul>(this.result);
+            bool first = true;
+            Simpul q = copy.Pop();
+            while(copy.Count>0)
+            {
+                Simpul p = q;
+                if (first)
+                {
+                    first = false;
+                }
+                else
+                {
+                    q = copy.Pop();
+                } 
+                int px = p.getX();
+                int py = p.getY();
+                int x = q.getX();
+                int y = q.getY();
+                if (x-px == 1)
+                {
+                    ret+="D";
+                }
+                else if (x-px == -1)
+                {
+                    ret+="U";
+                }
+                else if(y-py == 1)
+                {
+                    ret+="R";
+                }
+                else if (y-py == -1)
+                {
+                    ret+="L";
+                }
+            }
+            return ret;
+        }
+        public int getCountVisited()
+        {
+            return this.result.Count;
+        }
+        public int getStep()
+        {
+            return this.result.Count-1;
+        }
     }
 }
