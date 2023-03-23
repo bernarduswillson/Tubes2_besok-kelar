@@ -17,3 +17,22 @@ D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\obj\Debug\net7.0-wind
 D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.pdb
 D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.genruntimeconfig.cache
 D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\obj\Debug\net7.0-windows\ref\WinFormsApp1.dll
+D:\Tubes2_besok-kelar\bin\Debug\net7.0-windows\WinFormsApp1.exe
+D:\Tubes2_besok-kelar\bin\Debug\net7.0-windows\WinFormsApp1.deps.json
+D:\Tubes2_besok-kelar\bin\Debug\net7.0-windows\WinFormsApp1.runtimeconfig.json
+D:\Tubes2_besok-kelar\bin\Debug\net7.0-windows\WinFormsApp1.dll
+D:\Tubes2_besok-kelar\bin\Debug\net7.0-windows\WinFormsApp1.pdb
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.csproj.AssemblyReference.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.displayForm.resources
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.mainForm.resources
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.Properties.Resources.resources
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.csproj.GenerateResource.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.AssemblyInfoInputs.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.AssemblyInfo.cs
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.csproj.CoreCompileInputs.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.dll
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\refint\WinFormsApp1.dll
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.pdb
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\WinFormsApp1.genruntimeconfig.cache
+D:\Tubes2_besok-kelar\obj\Debug\net7.0-windows\ref\WinFormsApp1.dll

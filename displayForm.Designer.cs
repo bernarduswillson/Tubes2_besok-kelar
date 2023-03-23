@@ -42,6 +42,9 @@
             back = new Button();
             show = new Button();
             runtime = new Label();
+            routes = new Label();
+            steps = new Label();
+            nodes = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
@@ -207,6 +210,42 @@
             runtime.Text = "-";
             runtime.Click += runtime_Click;
             // 
+            // routes
+            // 
+            routes.AutoSize = true;
+            routes.BackColor = Color.Transparent;
+            routes.Font = new Font("Impact", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            routes.Location = new Point(147, 739);
+            routes.Name = "routes";
+            routes.Size = new Size(19, 28);
+            routes.TabIndex = 13;
+            routes.Text = "-";
+            routes.Click += routes_Click;
+            // 
+            // steps
+            // 
+            steps.AutoSize = true;
+            steps.BackColor = Color.Transparent;
+            steps.Font = new Font("Impact", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            steps.Location = new Point(141, 601);
+            steps.Name = "steps";
+            steps.Size = new Size(19, 28);
+            steps.TabIndex = 14;
+            steps.Text = "-";
+            steps.Click += steps_Click;
+            // 
+            // nodes
+            // 
+            nodes.AutoSize = true;
+            nodes.BackColor = Color.Transparent;
+            nodes.Font = new Font("Impact", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            nodes.Location = new Point(402, 601);
+            nodes.Name = "nodes";
+            nodes.Size = new Size(19, 28);
+            nodes.TabIndex = 15;
+            nodes.Text = "-";
+            nodes.Click += nodes_Click;
+            // 
             // displayForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -215,6 +254,9 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1262, 785);
+            Controls.Add(nodes);
+            Controls.Add(steps);
+            Controls.Add(routes);
             Controls.Add(runtime);
             Controls.Add(show);
             Controls.Add(back);
@@ -247,5 +289,8 @@
         private Button back;
         private Button show;
         private Label runtime;
+        private Label routes;
+        private Label steps;
+        private Label nodes;
     }
 }
