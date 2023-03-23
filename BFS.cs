@@ -149,6 +149,7 @@ namespace WinFormsApp1
             }
             public void init()
             {
+                countVisited++;
                 this.coorMap = new Queue<Simpul>();
                 bool found = false;
                 if (!tempProgress.isVisited(x,y))
@@ -177,6 +178,7 @@ namespace WinFormsApp1
                         coorMap.Clear();
                     }
                     coorMap.Enqueue(temp);
+                    countVisited++;
                 }
                 //Lakukan pengecekan pada bawah start        
                 if (this.x+1 < this.maze.GetLength(0) && this.maze[x+1,y] != 0 && !found)
@@ -206,6 +208,7 @@ namespace WinFormsApp1
                         this.flag = false;
                     }
                     coorMap.Enqueue(temp);
+                    countVisited++;
                 }
                 //Lakukan pengecekan pada kiri start
                 if (this.y-1 >= 0 && this.maze[x,y-1] != 0 && !found)
@@ -235,6 +238,7 @@ namespace WinFormsApp1
                         this.flag = false;
                     }
                     this.coorMap.Enqueue(temp);
+                    countVisited++;
                 }
                 //Lakukan pengecekan pada atas start        
                 if (this.x-1 >= 0 && this.maze[x-1,y] != 0 && ! found)
@@ -264,6 +268,7 @@ namespace WinFormsApp1
                         this.flag = false;
                     }
                     coorMap.Enqueue(temp); 
+                    countVisited++;
                 }
             }
             public Queue<String> getPath()
@@ -550,19 +555,19 @@ namespace WinFormsApp1
                     var (x,y) = route.getArr()[i];
                     if (x-px == 1)
                     {
-                        res+="D";
+                        res+="D ";
                     }
                     else if (x-px == -1)
                     {
-                        res+="U";
+                        res+="U ";
                     }
                     else if(y-py == 1)
                     {
-                        res+="R";
+                        res+="R ";
                     }
                     else if (y-py == -1)
                     {
-                        res+="L";
+                        res+="L ";
                     }
                 }
                 return res;

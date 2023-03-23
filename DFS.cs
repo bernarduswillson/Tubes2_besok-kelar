@@ -259,19 +259,19 @@ namespace WinFormsApp1
                 int y = q.getY();
                 if (x-px == 1)
                 {
-                    ret+="D";
+                    ret+="D ";
                 }
                 else if (x-px == -1)
                 {
-                    ret+="U";
+                    ret+="U ";
                 }
                 else if(y-py == 1)
                 {
-                    ret+="R";
+                    ret+="R ";
                 }
                 else if (y-py == -1)
                 {
-                    ret+="L";
+                    ret+="L ";
                 }
             }
             return ret;

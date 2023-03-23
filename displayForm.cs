@@ -17,6 +17,7 @@ using System.IO;
 using static System.Windows.Forms.DataFormats;
 using System.Windows.Forms.Design;
 using System.Diagnostics;
+using Microsoft.VisualBasic.Devices;
 
 namespace WinFormsApp1
 {
@@ -165,8 +166,16 @@ namespace WinFormsApp1
                     bfs.finalTSP();
 
                     stopwatch.Stop();
-
                     runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+
+                    string route = bfs.getRoute();
+                    routes.Text = route;
+
+                    int step = bfs.getStep();
+                    steps.Text = step.ToString();
+
+                    int node = bfs.getCountVisited();
+                    nodes.Text = node.ToString();
 
                     Queue<Simpul> copy = new Queue<Simpul>(bfs.getProgress());
                     int maxCount = 1;
@@ -323,6 +332,15 @@ namespace WinFormsApp1
                     }
                     stopwatch.Stop();
                     runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+
+                    string route = dfs.getRoute();
+                    routes.Text = route;
+
+                    int step = dfs.getStep();
+                    steps.Text = step.ToString();
+
+                    int node = dfs.getCountVisited();
+                    nodes.Text = node.ToString();
 
                     Stack<Simpul> copy = new Stack<Simpul>(dfs.getResult());
                     //find the most same value
@@ -695,6 +713,15 @@ namespace WinFormsApp1
                     stopwatch.Stop();
                     runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
 
+                    string route = bfs.getRoute();
+                    routes.Text = route;
+
+                    int step = bfs.getStep();
+                    steps.Text = step.ToString();
+
+                    int node = bfs.getCountVisited();
+                    nodes.Text = node.ToString();
+
                     Simpul res = new Simpul(x, y, arr);
                     res.unite(bfs.getResult());
                     int maxCount = 1;
@@ -750,6 +777,15 @@ namespace WinFormsApp1
 
                     stopwatch.Stop();
                     runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+
+                    string route = dfs.getRoute();
+                    routes.Text = route;
+
+                    int step = dfs.getStep();
+                    steps.Text = step.ToString();
+
+                    int node = dfs.getCountVisited();
+                    nodes.Text = node.ToString();
 
                     Stack<Simpul> copy = new Stack<Simpul>(dfs.getResult());
                     //find the most same value
@@ -810,6 +846,21 @@ namespace WinFormsApp1
         }
 
         private void runtime_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void routes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void steps_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nodes_Click(object sender, EventArgs e)
         {
 
         }
