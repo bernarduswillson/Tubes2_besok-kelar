@@ -163,7 +163,14 @@ namespace WinFormsApp1
                     stopwatch.Start();
 
                     BFS bfs = new BFS(x, y, arr, treasure);
-                    bfs.finalTSP();
+                    if (mainForm.TSPbool)
+                    {
+                        bfs.finalTSP();
+                    }
+                    else
+                    {
+                        bfs.finalSearch();
+                    }
 
                     stopwatch.Stop();
                     runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
@@ -494,6 +501,7 @@ namespace WinFormsApp1
             mainForm mainForm = new mainForm();
             mainForm.BFSbool = false;
             mainForm.DFSbool = false;
+            mainForm.TSPbool = false;
             mainForm.Show();
             this.Hide();
         }
@@ -708,7 +716,14 @@ namespace WinFormsApp1
                     stopwatch.Start();
 
                     BFS bfs = new BFS(x, y, arr, treasure);
-                    bfs.finalSearch();
+                    if (mainForm.TSPbool)
+                    {
+                        bfs.finalTSP();
+                    }
+                    else
+                    {
+                        bfs.finalSearch();
+                    }
 
                     stopwatch.Stop();
                     runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
@@ -773,7 +788,14 @@ namespace WinFormsApp1
                     stopwatch.Start();
 
                     DFS dfs = new DFS(x, y, treasure, arr);
-                    dfs.findPath();
+                    if (mainForm.TSPbool)
+                    {
+                        dfs.findHome();
+                    }
+                    else
+                    {
+                        dfs.findPath();
+                    }
 
                     stopwatch.Stop();
                     runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";

@@ -61,6 +61,7 @@ namespace WinFormsApp1
             {
                 TSPbool = true;
             }
+            else { TSPbool = false; }  
         }
 
         private void startButton_Click(object sender, EventArgs e)
