@@ -55,6 +55,8 @@ Keuntungan BFS adalah menjamin  solusi terpendek karena  memeriksa semua kemungk
  ┣ 📂doc
  ┃ ┣ 📜besok-kelar.pdf
  ┣ 📂src
+ ┃ ┣ 📜WinFormsApp1.csproj
+ ┃ ┣ 📜WinFormsApp1.sln
  ┃ ┣ 📂bin
  ┃ ┣ ┣ 📂debug
  ┃ ┣ ┣ ┣ 📂net7.0-windows
