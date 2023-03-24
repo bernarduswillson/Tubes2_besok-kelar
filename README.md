@@ -1,5 +1,5 @@
 # Pengaplikasian Algoritma BFS dan DFS dalam Menyelesaikan Persoalan Maze Treasure Hunt - STRATEGI ALGORITMA
-
+> Tugas Besar IF2211 Strategi Algoritma
 ## Anggota Kelompok
 <table>
     <tr>
@@ -74,9 +74,10 @@ Keuntungan BFS adalah menjamin  solusi terpendek karena  memeriksa semua kemungk
  ### Compile
  1. Clone repository Github ini
  2. Install semua requirements yang diperlukan
- 3. Jalankan program dengan mengetikkan `dotnet run` di terminal pada directory repository ini
+ 3. Jalankan program dengan mengetikkan `dotnet run --project ./src` di terminal pada directory repository ini
  ### Tanpa Compile
  1. Clone repository Github ini
  2. Install semua requirements yang diperlukan
- 3. Jalankan program dengan menjalankan `setup.exe` pada direktori bin
+ 3. Extract file `setup.zip` pada direktori bin
+ 4. Jalankan program dengan menjalankan `setup.exe` pada direktori bin
  
