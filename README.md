@@ -45,9 +45,7 @@ Keuntungan BFS adalah menjamin  solusi terpendek karena  memeriksa semua kemungk
 ```bash
 📦Tubes2_besok-kelar
  ┣ 📂bin
- ┃ ┗📂Application Files
- ┃ ┗ 📜MazeSolver.application
- ┃ ┗ 📜setup.exe
+ ┃ ┗ 📜setup.zip
  ┣ 📂test
  ┃ ┗ 📜sampel-1.exe
  ┃ ┗ 📜sampel-2.exe
