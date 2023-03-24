@@ -157,8 +157,9 @@ namespace WinFormsApp1
                     tempProgress.Append(x,y);
                     tempProgress.visit(x,y);
                 }
-                if (this.y+1 < this.maze.GetLength(1) && this.maze[x,y+1] != 0 && ! found)
+                if (this.y+1 < this.maze.GetLength(1) && this.maze[x,y+1] != 0 && ! found && this.visitedMaze[x,y+1] != -1)
                 {
+                    this.visitedMaze[x,y+1] = -1;
                     Simpul temp = new Simpul(x,y,this.maze);
                     temp.Append(x,y);
                     temp.Append(x,y+1);
@@ -181,8 +182,9 @@ namespace WinFormsApp1
                     countVisited++;
                 }
                 //Lakukan pengecekan pada bawah start        
-                if (this.x+1 < this.maze.GetLength(0) && this.maze[x+1,y] != 0 && !found)
+                if (this.x+1 < this.maze.GetLength(0) && this.maze[x+1,y] != 0 && !found && this.visitedMaze[x+1,y] != -1)
                 {
+                    this.visitedMaze[x+1,y] = -1;
                     Simpul temp = new Simpul(x,y,this.maze);
                     temp.Append(x,y);
                     temp.Append(x+1,y);
@@ -211,8 +213,9 @@ namespace WinFormsApp1
                     countVisited++;
                 }
                 //Lakukan pengecekan pada kiri start
-                if (this.y-1 >= 0 && this.maze[x,y-1] != 0 && !found)
+                if (this.y-1 >= 0 && this.maze[x,y-1] != 0 && !found && this.visitedMaze[x,y-1] != -1)
                 {
+                    this.visitedMaze[x,y-1] = -1;
                     Simpul temp = new Simpul(x,y,this.maze);
                     temp.Append(x,y);
                     temp.Append(x,y-1);
@@ -241,8 +244,9 @@ namespace WinFormsApp1
                     countVisited++;
                 }
                 //Lakukan pengecekan pada atas start        
-                if (this.x-1 >= 0 && this.maze[x-1,y] != 0 && ! found)
+                if (this.x-1 >= 0 && this.maze[x-1,y] != 0 && ! found && this.visitedMaze[x-1,y] != -1)
                 {
+                    this.visitedMaze[x-1,y] = -1;
                     Simpul temp = new Simpul(x,y,this.maze);
                     temp.Append(x,y);
                     temp.Append(x-1,y);
@@ -304,8 +308,9 @@ namespace WinFormsApp1
                 {
                     Simpul tempPath = coorMap.Dequeue();
                     int[] tempCoor = tempPath.getEl(tempPath.getIdx());
-                    if (canTravel(tempCoor[0],tempCoor[1]+1))
+                    if (canTravel(tempCoor[0],tempCoor[1]+1) && this.visitedMaze[tempCoor[0],tempCoor[1]+1] != -1)
                     {
+                        this.visitedMaze[tempCoor[0],tempCoor[1]+1] = -1;
                         //cek apakah treasure
                         Simpul append = new Simpul(tempPath);
                         if (goHome) 
@@ -346,8 +351,9 @@ namespace WinFormsApp1
                         countVisited++;
                     }
                     //cek bagian bawah
-                    if (canTravel(tempCoor[0]+1,tempCoor[1]))
+                    if (canTravel(tempCoor[0]+1,tempCoor[1]) && this.visitedMaze[tempCoor[0]+1,tempCoor[1]] != -1)
                     {
+                        this.visitedMaze[tempCoor[0]+1,tempCoor[1]] = -1;
                         //cek apakah treasure
                         Simpul append = new Simpul(tempPath);
                         if (goHome) 
@@ -387,9 +393,10 @@ namespace WinFormsApp1
                         countVisited++;
                     }
                     //cek bagian kiri
-                    if (canTravel(tempCoor[0],tempCoor[1]-1))
+                    if (canTravel(tempCoor[0],tempCoor[1]-1) && this.visitedMaze[tempCoor[0],tempCoor[1]-1] != -1)
                     {
                         //cek apakah treasure
+                        this.visitedMaze[tempCoor[0],tempCoor[1]-1] = -1;
                         Simpul append = new Simpul(tempPath);
                         if (goHome) 
                         {
@@ -428,8 +435,9 @@ namespace WinFormsApp1
                         countVisited++;
                     }
                     //cek bagian atas
-                    if (canTravel(tempCoor[0]-1,tempCoor[1]))
+                    if (canTravel(tempCoor[0]-1,tempCoor[1]) && this.visitedMaze[tempCoor[0]-1,tempCoor[1]] != -1)
                     {
+                        this.visitedMaze[tempCoor[0]-1,tempCoor[1]] = -1;
                         //cek apakah treasure
                         Simpul append = new Simpul(tempPath);
                         if (goHome) 
@@ -505,6 +513,16 @@ namespace WinFormsApp1
                     progress.Enqueue(tempProgress);
                     this.flag = true;
                     tempCount++;
+                    for (int i = 0 ; i < this.visitedMaze.GetLength(0) ; i++)
+                    {
+                        for (int j = 0 ; j < this.visitedMaze.GetLength(1) ; j++)
+                        {
+                            if (visitedMaze[i,j] == -1)
+                            {
+                                visitedMaze[i,j] = 2;
+                            }
+                        }
+                    }
                 }
                 
                 Simpul res = new Simpul(x,y,maze);
