@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Semester IV\\StrategiAlgoritma\\pindah\\Tubes2_besok-kelar\\src\\WinFormsApp1.csproj": {}
+    "D:\\Tubes2_besok-kelar\\src\\WinFormsApp1.csproj": {}
   },
   "projects": {
-    "D:\\Semester IV\\StrategiAlgoritma\\pindah\\Tubes2_besok-kelar\\src\\WinFormsApp1.csproj": {
+    "D:\\Tubes2_besok-kelar\\src\\WinFormsApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester IV\\StrategiAlgoritma\\pindah\\Tubes2_besok-kelar\\src\\WinFormsApp1.csproj",
+        "projectUniqueName": "D:\\Tubes2_besok-kelar\\src\\WinFormsApp1.csproj",
         "projectName": "MazeSolver",
-        "projectPath": "D:\\Semester IV\\StrategiAlgoritma\\pindah\\Tubes2_besok-kelar\\src\\WinFormsApp1.csproj",
-        "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester IV\\StrategiAlgoritma\\pindah\\Tubes2_besok-kelar\\src\\obj\\",
+        "projectPath": "D:\\Tubes2_besok-kelar\\src\\WinFormsApp1.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "D:\\Tubes2_besok-kelar\\src\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Henry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
         },
         "frameworks": {
           "net7.0-windows7.0": {
