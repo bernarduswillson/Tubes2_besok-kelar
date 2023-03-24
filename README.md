@@ -1,4 +1,4 @@
-# Pengaplikasian Algoritma BFS dan DFS dalam Menyelesaikan Persoalan Maze Treasure Hunt - sTRATEGI ALGORITMA
+# Pengaplikasian Algoritma BFS dan DFS dalam Menyelesaikan Persoalan Maze Treasure Hunt - STRATEGI ALGORITMA
 
 ## Anggota Kelompok
 <table>
@@ -45,8 +45,15 @@ Keuntungan BFS adalah menjamin  solusi terpendek karena  memeriksa semua kemungk
 ```bash
 📦Tubes2_besok-kelar
  ┣ 📂bin
- ┃ ┗ 📜MazeSolver.exe
+ ┃ ┗📂Application Files
+ ┃ ┗ 📜MazeSolver.application
+ ┃ ┗ 📜setup.exe
  ┣ 📂test
+ ┃ ┗ 📜sampel-1.exe
+ ┃ ┗ 📜sampel-2.exe
+ ┃ ┗ 📜sampel-3.exe
+ ┃ ┗ 📜sampel-4.exe
+ ┃ ┗ 📜sampel-5.exe
  ┣ 📂doc
  ┃ ┣ 📜besok-kelar.pdf
  ┣ 📂src
@@ -73,5 +80,5 @@ Keuntungan BFS adalah menjamin  solusi terpendek karena  memeriksa semua kemungk
  ### Tanpa Compile
  1. Clone repository Github ini
  2. Install semua requirements yang diperlukan
- 3. Jalankan program dengan menjalankan MazeSolver.exe pada direktori bin
+ 3. Jalankan program dengan menjalankan `setup.exe` pada direktori bin
  
