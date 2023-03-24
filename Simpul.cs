@@ -121,14 +121,8 @@ namespace WinFormsApp1
         }
         public bool isVisitedHome(int x, int y)
         {
-            if (maze[x, y] == -2)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (maze[x, y] == -2) { return true; }
+            else                  { return false; }
         }
         public void visit(int x, int y)
         {

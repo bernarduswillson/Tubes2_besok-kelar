@@ -40,7 +40,13 @@ namespace WinFormsApp1
             visitedMaze[first.getX(), first.getY()] = -2;
             visitedHome.Push(first);
             result.Push(first);
-
+            /*
+                urutan prioritas :
+                - kanan
+                - bawah
+                - kiri
+                - atas
+            */
             Simpul top;
             bool valid;
             while (true)
@@ -57,11 +63,7 @@ namespace WinFormsApp1
                     if (visitedMaze[top.getX(), top.getY() + 1] != -2)
                     {
                         top.canGoRight = false;
-                        Simpul temp = new Simpul(top.getX(), top.getY() + 1, maze);
-                        visitedHome.Push(top);
-                        visitedHome.Push(temp);
-                        result.Push(temp);
-                        visitedMaze[top.getX(), top.getY() + 1] = -2;
+                        pushResultHome(top.getX(), top.getY() + 1, top);
                         valid = false;
                     }
                 }
@@ -70,11 +72,7 @@ namespace WinFormsApp1
                     if (visitedMaze[top.getX() + 1, top.getY()] != -2)
                     {
                         top.canGoDown = false;
-                        Simpul temp = new Simpul(top.getX() + 1, top.getY(), maze);
-                        visitedHome.Push(top);
-                        visitedHome.Push(temp);
-                        result.Push(temp);
-                        visitedMaze[top.getX() + 1, top.getY()] = -2;
+                        pushResultHome(top.getX() + 1, top.getY(), top);
                         valid = false;
                     }
                 }
@@ -83,11 +81,7 @@ namespace WinFormsApp1
                     if (visitedMaze[top.getX(), top.getY() - 1] != -2)
                     {
                         top.canGoLeft = false;
-                        Simpul temp = new Simpul(top.getX(), top.getY() - 1, maze);
-                        visitedHome.Push(top);
-                        visitedHome.Push(temp);
-                        result.Push(temp);
-                        visitedMaze[top.getX(), top.getY() - 1] = -2;
+                        pushResultHome(top.getX(), top.getY() - 1, top);
                         valid = false;
                     }
                 }
@@ -96,11 +90,7 @@ namespace WinFormsApp1
                     if (visitedMaze[top.getX() - 1, top.getY()] != -2)
                     {
                         top.canGoUp = false;
-                        Simpul temp = new Simpul(top.getX() - 1, top.getY(), maze);
-                        visitedHome.Push(top);
-                        visitedHome.Push(temp);
-                        result.Push(temp);
-                        visitedMaze[top.getX() - 1, top.getY()] = -2;
+                        pushResultHome(top.getX() - 1, top.getY(), top);
                         valid = false;
                     }
                 }
@@ -132,10 +122,10 @@ namespace WinFormsApp1
             {
                 valid = true;
                 top = new Simpul(visited.Pop());
-                if (maze[top.getX(), top.getY()] == 3)
+                if (top.isTreasure(top.getX(), top.getY()))
                 {
                     count++;
-                    maze[top.getX(), top.getY()] = 2;
+                    top.pickTreasure(top.getX(), top.getY());
                 }
                 if (count == totalTreasure)
                 {
@@ -147,11 +137,7 @@ namespace WinFormsApp1
                     if (visitedMaze[top.getX(), top.getY() + 1] != -1)
                     {
                         top.canGoRight = false;
-                        Simpul temp = new Simpul(top.getX(), top.getY() + 1, maze);
-                        visited.Push(top);
-                        visited.Push(temp);
-                        result.Push(temp);
-                        visitedMaze[top.getX(), top.getY() + 1] = -1;
+                        pushResult(top.getX(), top.getY() + 1, top);
                         valid = false;
                     }
                 }
@@ -160,11 +146,7 @@ namespace WinFormsApp1
                     if (visitedMaze[top.getX() + 1, top.getY()] != -1)
                     {
                         top.canGoDown = false;
-                        Simpul temp = new Simpul(top.getX() + 1, top.getY(), maze);
-                        visited.Push(top);
-                        visited.Push(temp);
-                        result.Push(temp);
-                        visitedMaze[top.getX() + 1, top.getY()] = -1;
+                        pushResult(top.getX() + 1, top.getY(), top);
                         valid = false;
                     }
                 }
@@ -173,11 +155,7 @@ namespace WinFormsApp1
                     if (visitedMaze[top.getX(), top.getY() - 1] != -1)
                     {
                         top.canGoLeft = false;
-                        Simpul temp = new Simpul(top.getX(), top.getY() - 1, maze);
-                        visited.Push(top);
-                        visited.Push(temp);
-                        result.Push(temp);
-                        visitedMaze[top.getX(), top.getY() - 1] = -1;
+                        pushResult(top.getX(), top.getY() - 1, top);
                         valid = false;
                     }
                 }
@@ -186,11 +164,7 @@ namespace WinFormsApp1
                     if (visitedMaze[top.getX() - 1, top.getY()] != -1)
                     {
                         top.canGoUp = false;
-                        Simpul temp = new Simpul(top.getX() - 1, top.getY(), maze);
-                        visited.Push(top);
-                        visited.Push(temp);
-                        result.Push(temp);
-                        visitedMaze[top.getX() - 1, top.getY()] = -1;
+                        pushResult(top.getX() - 1, top.getY(), top);
                         valid = false;
                     }
                 }
@@ -203,6 +177,25 @@ namespace WinFormsApp1
                 this.countSteps++;
             }
         }
+
+        public void pushResult(int x, int y, Simpul top)
+        {
+            Simpul temp = new Simpul(x, y, maze);
+            this.visited.Push(top);
+            this.visited.Push(temp);
+            this.result.Push(temp);
+            this.visitedMaze[x, y] = -1;
+        }
+
+        public void pushResultHome(int x, int y, Simpul top)
+        {
+            Simpul temp = new Simpul(x, y, maze);
+            this.visitedHome.Push(top);
+            this.visitedHome.Push(temp);
+            this.result.Push(temp);
+            this.visitedMaze[x, y] = -2;
+        }
+
         public void displayPath()
         {
             Stack<Simpul> copy = new Stack<Simpul>(this.result);
