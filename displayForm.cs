@@ -23,12 +23,102 @@ namespace WinFormsApp1
 {
     public partial class displayForm : Form
     {
+        public string fileName;
+
         bool isProcessRunning = false;
         bool mapShowed = false;
-        public string fileName;
+        bool routeShowed = false;
+        int row = 1;
+        int col = 0;
+        int x = 0;
+        int y = 0;
+        int treasure = 0;
+        int[,] arr;
+
+
         public displayForm()
         {
             InitializeComponent();
+            this.fileName = mainForm.fileName;
+            string filePath = mainForm.fileName;
+            StreamReader reader = new StreamReader(filePath);
+            //Tentuin kolom dan baris
+            String line = reader.ReadLine();
+            foreach (char c in line)
+            {
+                if (c != ' ')
+                {
+                    col++;
+                }
+            }
+            while ((line = reader.ReadLine()) != null)
+            {
+                row++;
+            }
+
+            //BIKIN MATRIKS
+            arr = new int[row, col];
+            int charCode;
+            int idRow = 0;
+            int idCol = 0;
+            int count = 0;
+            StreamReader reader2 = new StreamReader(filePath);
+            while ((charCode = reader2.Read()) != -1)
+            {
+                char c = (char)charCode;
+                if (idRow == row)
+                {
+                    break;
+                }
+                if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
+                {
+                    if (c == 'K')
+                    {
+                        arr[idRow, idCol] = 1;
+                    }
+                    else if (c == 'R')
+                    {
+                        arr[idRow, idCol] = 2;
+                    }
+                    else if (c == 'T')
+                    {
+                        arr[idRow, idCol] = 3;
+                        count++;
+                    }
+                    else
+                    {
+                        arr[idRow, idCol] = 0;
+                    }
+                    idCol++;
+                    if (idCol == col)
+                    {
+                        idRow++;
+                        idCol = 0;
+                    }
+                }
+            }
+            reader.Close();
+            reader2.Close();
+            // Simpul root;
+            //bikin graph
+            x = 0;
+            y = 0;
+            treasure = 0;
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                {
+                    if (arr[i, j] == 1)
+                    {
+                        x = i;
+                        y = j;
+                    }
+                    if (arr[i, j] == 3)
+                    {
+                        treasure++;
+                    }
+                }
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -62,107 +152,17 @@ namespace WinFormsApp1
 
         public async void search_Click(object sender, EventArgs e)
         {
-            int row = 1;
-            int col = 0;
             if (mainForm.fileName != null && !isProcessRunning && mapShowed)
             {
-                dataGridView1.CurrentCell = null;
-                isProcessRunning = true;
-                this.fileName = mainForm.fileName;
-                string filePath = mainForm.fileName;
-                StreamReader reader = new StreamReader(filePath);
-                //Tentuin kolom dan baris
-                String line = reader.ReadLine();
-                foreach (char c in line)
-                {
-                    if (c != ' ')
-                    {
-                        col++;
-                    }
-                }
-                while ((line = reader.ReadLine()) != null)
-                {
-                    row++;
-                }
 
-                //BIKIN MATRIKS
-                int[,] arr = new int[row, col];
-                int charCode;
-                int idRow = 0;
-                int idCol = 0;
-                int count = 0;
-                StreamReader reader2 = new StreamReader(filePath);
-                while ((charCode = reader2.Read()) != -1)
-                {
-                    char c = (char)charCode;
-                    if (idRow == row)
-                    {
-                        break;
-                    }
-                    if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
-                    {
-                        // Console.Write("IDROW : " + idRow + "\n");
-                        // Console.Write("     IDCOL : " + idCol + "\n");
-                        if (c == 'K')
-                        {
-                            arr[idRow, idCol] = 1;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Red;
-                            dataGridView1.Rows[idRow].Cells[idCol].Value = "Start";
-                        }
-                        else if (c == 'R')
-                        {
-                            arr[idRow, idCol] = 2;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.White;
-                        }
-                        else if (c == 'T')
-                        {
-                            arr[idRow, idCol] = 3;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Gold;
-                            dataGridView1.Rows[idRow].Cells[idCol].Value = "Treasure";
-                            count++;
-                        }
-                        else
-                        {
-                            arr[idRow, idCol] = 0;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Black;
-                        }
-                        idCol++;
-                        if (idCol == col)
-                        {
-                            idRow++;
-                            idCol = 0;
-                        }
-                    }
-                }
-                reader.Close();
-                reader2.Close();
-                // Simpul root;
-                //bikin graph
-                int x = 0;
-                int y = 0;
-                int treasure = 0;
-                for (int i = 0; i < row; i++)
-                {
-                    for (int j = 0; j < col; j++)
-                    {
-                        if (arr[i, j] == 1)
-                        {
-                            x = i;
-                            y = j;
-                        }
-                        if (arr[i, j] == 3)
-                        {
-                            treasure++;
-                        }
-                    }
-                }
+                isProcessRunning = true;
 
                 if (mainForm.BFSbool)
                 {
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
 
-                    BFS bfs = new BFS(x, y, arr, treasure);
+                    BFS bfs = new BFS(this.x, this.y, this.arr, this.treasure);
                     if (mainForm.TSPbool)
                     {
                         bfs.finalTSP();
@@ -225,99 +225,7 @@ namespace WinFormsApp1
                             }
                         }
                         await Task.Delay(1000 - trackBar1.Value);
-                        filePath = mainForm.fileName;
-                        this.fileName = mainForm.fileName;
-                        StreamReader reader1 = new StreamReader(filePath);
-                        //Tentuin kolom dan baris
-                        row = 1;
-                        col = 0;
-                        String line1 = reader1.ReadLine();
-                        foreach (char c in line1)
-                        {
-                            if (c != ' ')
-                            {
-                                col++;
-                            }
-                        }
-                        while ((line1 = reader1.ReadLine()) != null)
-                        {
-                            row++;
-                        }
-
-                        dataGridView1.RowHeadersVisible = false;
-                        dataGridView1.ColumnHeadersVisible = false;
-                        dataGridView1.Enabled = false;
-                        dataGridView1.ReadOnly = true;
-                        dataGridView1.AllowUserToAddRows = false;
-                        dataGridView1.AllowUserToDeleteRows = false;
-                        dataGridView1.AllowUserToResizeColumns = false;
-                        dataGridView1.AllowUserToResizeRows = false;
-                        dataGridView1.ScrollBars = ScrollBars.None;
-                        dataGridView1.MultiSelect = false;
-                        dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                        dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
-
-                        dataGridView1.ColumnCount = col;
-                        dataGridView1.RowCount = row;
-
-
-                        int rowHeight = dataGridView1.ClientSize.Height / dataGridView1.RowCount;
-                        for (int i = 0; i < dataGridView1.RowCount; i++)
-                        {
-                            dataGridView1.Rows[i].Height = rowHeight;
-                        }
-
-                        dataGridView1.CurrentCell = null;
-
-                        int[,] arr1 = new int[row, col];
-                        idRow = 0;
-                        idCol = 0;
-                        count = 0;
-                        StreamReader reader3 = new StreamReader(filePath);
-                        while ((charCode = reader3.Read()) != -1)
-                        {
-                            char c = (char)charCode;
-                            if (idRow == row)
-                            {
-                                break;
-                            }
-                            if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
-                            {
-                                // Console.Write("IDROW : " + idRow + "\n");
-                                // Console.Write("     IDCOL : " + idCol + "\n");
-                                if (c == 'K')
-                                {
-                                    arr1[idRow, idCol] = 1;
-                                    dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Red;
-                                    dataGridView1.Rows[idRow].Cells[idCol].Value = "Start";
-                                }
-                                else if (c == 'R')
-                                {
-                                    arr1[idRow, idCol] = 2;
-                                    dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.White;
-                                }
-                                else if (c == 'T')
-                                {
-                                    arr1[idRow, idCol] = 3;
-                                    dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Gold;
-                                    dataGridView1.Rows[idRow].Cells[idCol].Value = "Treasure";
-                                    count++;
-                                }
-                                else
-                                {
-                                    arr1[idRow, idCol] = 0;
-                                    dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Black;
-                                }
-                                idCol++;
-                                if (idCol == col)
-                                {
-                                    idRow++;
-                                    idCol = 0;
-                                }
-                            }
-                        }
-                        reader1.Close();
-                        reader3.Close();
+                        clearMap();
                     }
                     await Task.Delay(1000);
                     isProcessRunning = false;
@@ -328,7 +236,7 @@ namespace WinFormsApp1
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
 
-                    DFS dfs = new DFS(x, y, treasure, arr);
+                    DFS dfs = new DFS(this.x, this.y, this.treasure, this.arr);
                     if (mainForm.TSPbool)
                     {
                         dfs.findHome();
@@ -389,99 +297,7 @@ namespace WinFormsApp1
                         }
                     }
                     await Task.Delay(1000);
-                    filePath = mainForm.fileName;
-                    this.fileName = mainForm.fileName;
-                    StreamReader reader1 = new StreamReader(filePath);
-                    //Tentuin kolom dan baris
-                    row = 1;
-                    col = 0;
-                    String line1 = reader1.ReadLine();
-                    foreach (char c in line1)
-                    {
-                        if (c != ' ')
-                        {
-                            col++;
-                        }
-                    }
-                    while ((line1 = reader1.ReadLine()) != null)
-                    {
-                        row++;
-                    }
-
-                    dataGridView1.RowHeadersVisible = false;
-                    dataGridView1.ColumnHeadersVisible = false;
-                    dataGridView1.Enabled = false;
-                    dataGridView1.ReadOnly = true;
-                    dataGridView1.AllowUserToAddRows = false;
-                    dataGridView1.AllowUserToDeleteRows = false;
-                    dataGridView1.AllowUserToResizeColumns = false;
-                    dataGridView1.AllowUserToResizeRows = false;
-                    dataGridView1.ScrollBars = ScrollBars.None;
-                    dataGridView1.MultiSelect = false;
-                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
-
-                    dataGridView1.ColumnCount = col;
-                    dataGridView1.RowCount = row;
-
-
-                    int rowHeight = dataGridView1.ClientSize.Height / dataGridView1.RowCount;
-                    for (int i = 0; i < dataGridView1.RowCount; i++)
-                    {
-                        dataGridView1.Rows[i].Height = rowHeight;
-                    }
-
-                    dataGridView1.CurrentCell = null;
-
-                    int[,] arr1 = new int[row, col];
-                    idRow = 0;
-                    idCol = 0;
-                    count = 0;
-                    StreamReader reader3 = new StreamReader(filePath);
-                    while ((charCode = reader3.Read()) != -1)
-                    {
-                        char c = (char)charCode;
-                        if (idRow == row)
-                        {
-                            break;
-                        }
-                        if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
-                        {
-                            // Console.Write("IDROW : " + idRow + "\n");
-                            // Console.Write("     IDCOL : " + idCol + "\n");
-                            if (c == 'K')
-                            {
-                                arr1[idRow, idCol] = 1;
-                                dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Red;
-                                dataGridView1.Rows[idRow].Cells[idCol].Value = "Start";
-                            }
-                            else if (c == 'R')
-                            {
-                                arr1[idRow, idCol] = 2;
-                                dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.White;
-                            }
-                            else if (c == 'T')
-                            {
-                                arr1[idRow, idCol] = 3;
-                                dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Gold;
-                                dataGridView1.Rows[idRow].Cells[idCol].Value = "Treasure";
-                                count++;
-                            }
-                            else
-                            {
-                                arr1[idRow, idCol] = 0;
-                                dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Black;
-                            }
-                            idCol++;
-                            if (idCol == col)
-                            {
-                                idRow++;
-                                idCol = 0;
-                            }
-                        }
-                    }
-                    reader1.Close();
-                    reader3.Close();
+                    clearMap();
                 }
                 await Task.Delay(1000);
                 isProcessRunning = false;
@@ -508,214 +324,30 @@ namespace WinFormsApp1
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView1.CurrentCell = null;
         }
 
         private void show_Click(object sender, EventArgs e)
         {
             if (!isProcessRunning)
             {
-                string filePath = mainForm.fileName;
-                this.fileName = mainForm.fileName;
-                StreamReader reader = new StreamReader(filePath);
-                //Tentuin kolom dan baris
-                int row = 1;
-                int col = 0;
-                String line = reader.ReadLine();
-                foreach (char c in line)
-                {
-                    if (c != ' ')
-                    {
-                        col++;
-                    }
-                }
-                while ((line = reader.ReadLine()) != null)
-                {
-                    row++;
-                }
-
-                dataGridView1.RowHeadersVisible = false;
-                dataGridView1.ColumnHeadersVisible = false;
-                dataGridView1.Enabled = false;
-                dataGridView1.ReadOnly = true;
-                dataGridView1.AllowUserToAddRows = false;
-                dataGridView1.AllowUserToDeleteRows = false;
-                dataGridView1.AllowUserToResizeColumns = false;
-                dataGridView1.AllowUserToResizeRows = false;
-                dataGridView1.ScrollBars = ScrollBars.None;
-                dataGridView1.MultiSelect = false;
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
-
-                dataGridView1.ColumnCount = col;
-                dataGridView1.RowCount = row;
-
-
-                int rowHeight = dataGridView1.ClientSize.Height / dataGridView1.RowCount;
-                for (int i = 0; i < dataGridView1.RowCount; i++)
-                {
-                    dataGridView1.Rows[i].Height = rowHeight;
-                }
-
-                dataGridView1.CurrentCell = null;
-
-                int[,] arr = new int[row, col];
-                int charCode;
-                int idRow = 0;
-                int idCol = 0;
-                int count = 0;
-                StreamReader reader2 = new StreamReader(filePath);
-                while ((charCode = reader2.Read()) != -1)
-                {
-                    char c = (char)charCode;
-                    if (idRow == row)
-                    {
-                        break;
-                    }
-                    if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
-                    {
-                        // Console.Write("IDROW : " + idRow + "\n");
-                        // Console.Write("     IDCOL : " + idCol + "\n");
-                        if (c == 'K')
-                        {
-                            arr[idRow, idCol] = 1;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Red;
-                            dataGridView1.Rows[idRow].Cells[idCol].Value = "Start";
-                        }
-                        else if (c == 'R')
-                        {
-                            arr[idRow, idCol] = 2;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.White;
-                        }
-                        else if (c == 'T')
-                        {
-                            arr[idRow, idCol] = 3;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Gold;
-                            dataGridView1.Rows[idRow].Cells[idCol].Value = "Treasure";
-                            count++;
-                        }
-                        else
-                        {
-                            arr[idRow, idCol] = 0;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Black;
-                        }
-                        idCol++;
-                        if (idCol == col)
-                        {
-                            idRow++;
-                            idCol = 0;
-                        }
-                    }
-                }
-                reader.Close();
-                reader2.Close();
+                clearMap();
                 mapShowed = true;
             }
         }
 
         public async void Route_Click(object sender, EventArgs e)
         {
-            int row = 1;
-            int col = 0;
             if (mainForm.fileName != null && !isProcessRunning && mapShowed)
             {
-                dataGridView1.CurrentCell = null;
+                clearMap();
                 isProcessRunning = true;
-                this.fileName = mainForm.fileName;
-                string filePath = mainForm.fileName;
-                StreamReader reader = new StreamReader(filePath);
-                //Tentuin kolom dan baris
-                String line = reader.ReadLine();
-                foreach (char c in line)
-                {
-                    if (c != ' ')
-                    {
-                        col++;
-                    }
-                }
-                while ((line = reader.ReadLine()) != null)
-                {
-                    row++;
-                }
-
-                //BIKIN MATRIKS
-                int[,] arr = new int[row, col];
-                int charCode;
-                int idRow = 0;
-                int idCol = 0;
-                int count = 0;
-                StreamReader reader2 = new StreamReader(filePath);
-                while ((charCode = reader2.Read()) != -1)
-                {
-                    char c = (char)charCode;
-                    if (idRow == row)
-                    {
-                        break;
-                    }
-                    if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
-                    {
-                        // Console.Write("IDROW : " + idRow + "\n");
-                        // Console.Write("     IDCOL : " + idCol + "\n");
-                        if (c == 'K')
-                        {
-                            arr[idRow, idCol] = 1;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Red;
-                            dataGridView1.Rows[idRow].Cells[idCol].Value = "Start";
-                        }
-                        else if (c == 'R')
-                        {
-                            arr[idRow, idCol] = 2;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.White;
-                        }
-                        else if (c == 'T')
-                        {
-                            arr[idRow, idCol] = 3;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Gold;
-                            dataGridView1.Rows[idRow].Cells[idCol].Value = "Treasure";
-                            count++;
-                        }
-                        else
-                        {
-                            arr[idRow, idCol] = 0;
-                            dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Black;
-                        }
-                        idCol++;
-                        if (idCol == col)
-                        {
-                            idRow++;
-                            idCol = 0;
-                        }
-                    }
-                }
-                reader.Close();
-                reader2.Close();
-                // Simpul root;
-                //bikin graph
-                int x = 0;
-                int y = 0;
-                int treasure = 0;
-                for (int i = 0; i < row; i++)
-                {
-                    for (int j = 0; j < col; j++)
-                    {
-                        if (arr[i, j] == 1)
-                        {
-                            x = i;
-                            y = j;
-                        }
-                        if (arr[i, j] == 3)
-                        {
-                            treasure++;
-                        }
-                    }
-                }
-
+    
                 if (mainForm.BFSbool)
                 {
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
 
-                    BFS bfs = new BFS(x, y, arr, treasure);
+                    BFS bfs = new BFS(this.x, this.y, this.arr, this.treasure);
                     if (mainForm.TSPbool)
                     {
                         bfs.finalTSP();
@@ -782,12 +414,13 @@ namespace WinFormsApp1
                     await Task.Delay(1000);
                     isProcessRunning = false;
                 }
+
                 else if (mainForm.DFSbool)
                 {
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
 
-                    DFS dfs = new DFS(x, y, treasure, arr);
+                    DFS dfs = new DFS(this.x, this.y, this.treasure, this.arr);
                     if (mainForm.TSPbool)
                     {
                         dfs.findHome();
@@ -885,6 +518,98 @@ namespace WinFormsApp1
         private void nodes_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void clearMap()
+        {
+            string filePath = mainForm.fileName;
+            this.fileName = mainForm.fileName;
+            StreamReader reader = new StreamReader(filePath);
+            //Tentuin kolom dan baris
+            int row = 1;
+            int col = 0;
+            String line = reader.ReadLine();
+            foreach (char c in line)
+            {
+                if (c != ' ')
+                {
+                    col++;
+                }
+            }
+            while ((line = reader.ReadLine()) != null)
+            {
+                row++;
+            }
+
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.ColumnHeadersVisible = false;
+            dataGridView1.Enabled = false;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.ScrollBars = ScrollBars.None;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
+
+            dataGridView1.ColumnCount = col;
+            dataGridView1.RowCount = row;
+
+
+            int rowHeight = dataGridView1.ClientSize.Height / dataGridView1.RowCount;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Height = rowHeight;
+            }
+
+            dataGridView1.CurrentCell = null;
+
+            int[,] arr = new int[row, col];
+            int charCode;
+            int idRow = 0;
+            int idCol = 0;
+            int count = 0;
+            StreamReader reader2 = new StreamReader(filePath);
+            while ((charCode = reader2.Read()) != -1)
+            {
+                char c = (char)charCode;
+                if (idRow == row)
+                {
+                    break;
+                }
+                if (c == 'K' || c == 'R' || c == 'T' || c == 'X')
+                {
+                    if (c == 'K')
+                    {
+                        dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Red;
+                        dataGridView1.Rows[idRow].Cells[idCol].Value = "Start";
+                    }
+                    else if (c == 'R')
+                    {
+                        dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.White;
+                    }
+                    else if (c == 'T')
+                    {
+                        dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Gold;
+                        dataGridView1.Rows[idRow].Cells[idCol].Value = "Treasure";
+                        count++;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[idRow].Cells[idCol].Style.BackColor = Color.Black;
+                    }
+                    idCol++;
+                    if (idCol == col)
+                    {
+                        idRow++;
+                        idCol = 0;
+                    }
+                }
+            }
+            reader.Close();
+            reader2.Close();
         }
     }
 }
