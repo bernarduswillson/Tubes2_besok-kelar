@@ -47,10 +47,10 @@
             startButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             startButton.FlatStyle = FlatStyle.Flat;
             startButton.ForeColor = Color.Transparent;
-            startButton.Location = new Point(568, 780);
-            startButton.Margin = new Padding(4, 5, 4, 5);
+            startButton.Location = new Point(454, 624);
+            startButton.Margin = new Padding(3, 4, 3, 4);
             startButton.Name = "startButton";
-            startButton.Size = new Size(479, 92);
+            startButton.Size = new Size(383, 74);
             startButton.TabIndex = 0;
             startButton.UseVisualStyleBackColor = false;
             startButton.Click += startButton_Click;
@@ -65,10 +65,10 @@
             Choose.FlatAppearance.MouseOverBackColor = Color.Transparent;
             Choose.FlatStyle = FlatStyle.Flat;
             Choose.ForeColor = Color.Transparent;
-            Choose.Location = new Point(418, 295);
-            Choose.Margin = new Padding(4, 5, 4, 5);
+            Choose.Location = new Point(334, 236);
+            Choose.Margin = new Padding(3, 4, 3, 4);
             Choose.Name = "Choose";
-            Choose.Size = new Size(749, 90);
+            Choose.Size = new Size(599, 72);
             Choose.TabIndex = 1;
             Choose.UseVisualStyleBackColor = false;
             Choose.Click += Choose_Click;
@@ -77,10 +77,10 @@
             // 
             BFS.AutoSize = true;
             BFS.BackColor = Color.Transparent;
-            BFS.Location = new Point(544, 458);
-            BFS.Margin = new Padding(4, 5, 4, 5);
+            BFS.Location = new Point(435, 366);
+            BFS.Margin = new Padding(3, 4, 3, 4);
             BFS.Name = "BFS";
-            BFS.Size = new Size(21, 20);
+            BFS.Size = new Size(17, 16);
             BFS.TabIndex = 2;
             BFS.TabStop = true;
             BFS.UseVisualStyleBackColor = false;
@@ -90,10 +90,10 @@
             // 
             DFS.AutoSize = true;
             DFS.BackColor = Color.Transparent;
-            DFS.Location = new Point(544, 562);
-            DFS.Margin = new Padding(4, 5, 4, 5);
+            DFS.Location = new Point(435, 450);
+            DFS.Margin = new Padding(3, 4, 3, 4);
             DFS.Name = "DFS";
-            DFS.Size = new Size(21, 20);
+            DFS.Size = new Size(17, 16);
             DFS.TabIndex = 3;
             DFS.TabStop = true;
             DFS.UseVisualStyleBackColor = false;
@@ -103,10 +103,10 @@
             // 
             TSP.AutoSize = true;
             TSP.BackColor = Color.Transparent;
-            TSP.Location = new Point(1019, 709);
-            TSP.Margin = new Padding(4, 5, 4, 5);
+            TSP.Location = new Point(815, 567);
+            TSP.Margin = new Padding(3, 4, 3, 4);
             TSP.Name = "TSP";
-            TSP.Size = new Size(22, 21);
+            TSP.Size = new Size(18, 17);
             TSP.TabIndex = 4;
             TSP.UseVisualStyleBackColor = false;
             TSP.CheckedChanged += TSP_CheckedChanged;
@@ -117,21 +117,20 @@
             name.BackColor = Color.Transparent;
             name.Font = new Font("Candara", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             name.ForeColor = Color.White;
-            name.Location = new Point(496, 382);
-            name.Margin = new Padding(4, 0, 4, 0);
+            name.Location = new Point(397, 306);
             name.Name = "name";
-            name.Size = new Size(187, 35);
+            name.Size = new Size(154, 28);
             name.TabIndex = 5;
             name.Text = "File Name: .txt";
             name.Click += name_Click;
             // 
             // mainForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1578, 981);
+            ClientSize = new Size(1262, 785);
             Controls.Add(name);
             Controls.Add(TSP);
             Controls.Add(DFS);
@@ -140,11 +139,12 @@
             Controls.Add(startButton);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "mainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Maze Solver";
+            Load += mainForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

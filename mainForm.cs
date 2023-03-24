@@ -61,7 +61,7 @@ namespace WinFormsApp1
             {
                 TSPbool = true;
             }
-            else { TSPbool = false; }  
+            else { TSPbool = false; }
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -132,6 +132,11 @@ namespace WinFormsApp1
         }
 
         private void name_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mainForm_Load(object sender, EventArgs e)
         {
 
         }

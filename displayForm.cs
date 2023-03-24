@@ -16,7 +16,6 @@ using System.Net;
 using System.IO;
 using static System.Windows.Forms.DataFormats;
 using System.Windows.Forms.Design;
-using System.Diagnostics;
 using Microsoft.VisualBasic.Devices;
 
 namespace WinFormsApp1
@@ -154,7 +153,7 @@ namespace WinFormsApp1
         {
             if (mainForm.fileName != null && !isProcessRunning && mapShowed)
             {
-
+                clearMap();
                 isProcessRunning = true;
 
                 if (mainForm.BFSbool)
@@ -173,7 +172,7 @@ namespace WinFormsApp1
                     }
 
                     stopwatch.Stop();
-                    runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+                    runtime.Text = stopwatch.Elapsed.TotalMilliseconds.ToString() + " ms";
 
                     string route = bfs.getRoute();
                     routes.Text = route;
@@ -246,7 +245,7 @@ namespace WinFormsApp1
                         dfs.findPath();
                     }
                     stopwatch.Stop();
-                    runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+                    runtime.Text = stopwatch.Elapsed.TotalMilliseconds.ToString() + " ms";
 
                     string route = dfs.getRoute();
                     routes.Text = route;
@@ -341,7 +340,7 @@ namespace WinFormsApp1
             {
                 clearMap();
                 isProcessRunning = true;
-    
+
                 if (mainForm.BFSbool)
                 {
                     Stopwatch stopwatch = new Stopwatch();
@@ -358,7 +357,7 @@ namespace WinFormsApp1
                     }
 
                     stopwatch.Stop();
-                    runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+                    runtime.Text = stopwatch.Elapsed.TotalMilliseconds.ToString() + " ms";
 
                     string route = bfs.getRoute();
                     routes.Text = route;
@@ -431,7 +430,7 @@ namespace WinFormsApp1
                     }
 
                     stopwatch.Stop();
-                    runtime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+                    runtime.Text = stopwatch.Elapsed.TotalMilliseconds.ToString() + " ms";
 
                     string route = dfs.getRoute();
                     routes.Text = route;
