@@ -1,0 +1,5 @@
+D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\src\bin\Release\net7.0-windows\app.publish\MazeSolver.exe
+D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\src\bin\Release\net7.0-windows\app.publish\MazeSolver.dll
+D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\src\bin\Release\net7.0-windows\app.publish\MazeSolver.deps.json
+D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\src\bin\Release\net7.0-windows\app.publish\MazeSolver.runtimeconfig.json
+D:\Semester IV\StrategiAlgoritma\pindah\Tubes2_besok-kelar\src\bin\Release\net7.0-windows\app.publish\MazeSolver.pdb
